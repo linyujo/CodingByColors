@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageProps } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -7,22 +7,20 @@ import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
 interface Props {
-  data: {
-    allMarkdownRemark: any
-    site: {
-      siteMetadata: {
-        title: string
-      }
+  allMarkdownRemark: any
+  site: {
+    siteMetadata: {
+      title: string
     }
   }
 }
 
-const BlogIndex = ({ data }: Props) => {
+const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
   return (
-    <Layout location={window.location} title={siteTitle}>
+    <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
       {posts.map(({ node }) => {

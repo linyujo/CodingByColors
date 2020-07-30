@@ -6,10 +6,9 @@ import { rhythm, scale } from "../utils/typography"
 interface Props {
   location: Location
   title: string
-  children?: any
 }
 
-const Layout = ({ location, title, children }: Props) => {
+const Layout: React.FC<Props> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
 

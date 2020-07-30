@@ -1,27 +1,39 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageProps } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-interface Props {
-  data: {
-    markdownRemark: any
-    site: {
-      siteMetadata: {
-        title: string
-      }
-    }
+interface PageContext {
+  fields: {
+    slug: string
   }
-  pageContext: any
+  frontmatter: {
+    title: string
+  }
 }
 
-const BlogPostTemplate = ({ data, pageContext }: Props) => {
+interface Props {
+  markdownRemark: any
+  site: {
+    siteMetadata: {
+      title: string
+    }
+  }
+}
+
+const BlogPostTemplate: React.FC<PageProps<Props>> = ({
+  data,
+  pageContext,
+}) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
-  const { previous, next } = pageContext
+  const {
+    previous,
+    next,
+  }: { previous?: PageContext; next?: PageContext } = pageContext
 
   return (
     <Layout location={window.location} title={siteTitle}>
