@@ -1,0 +1,57 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap-grid.min.css");
+@import url("https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap");
+
+* {
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Helvetica", "Arial", "黑體-繁", "微軟正黑體",
+    "Microsoft JhengHei", sans-serif;
+}
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: none;
+  color: #484848;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+/*
+ * Override bootstrap-grid
+ */
+.container {
+  @media (max-width: 992px) {
+    max-width: calc(100% - 64px);
+  }
+  @media (max-width: 768px) {
+    max-width: calc(100% - 64px);
+  }
+  @media (max-width: 576px) {
+    max-width: calc(100% - 32px);
+  }
+}

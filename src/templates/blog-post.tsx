@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
+import "../styles/_basic.scss"
+
 interface PageContext {
   fields: {
     slug: string
@@ -26,6 +28,7 @@ interface Props {
 
 const BlogPostTemplate: React.FC<PageProps<Props>> = ({
   data,
+  location,
   pageContext,
 }) => {
   const post = data.markdownRemark
@@ -36,7 +39,7 @@ const BlogPostTemplate: React.FC<PageProps<Props>> = ({
   }: { previous?: PageContext; next?: PageContext } = pageContext
 
   return (
-    <Layout location={window.location} title={siteTitle}>
+    <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
