@@ -1,8 +1,8 @@
 ---
 id: 20200103J
 slug: /algorithms_and_data_structure_reverse_string
-title: 每日資料結構與演算法by JS（一）
-subTitle: 文字反轉
+title: 文字反轉
+subTitle:
 date: 2020-01-03T1:00:00Z
 description: 如果你也常因為過度完美主義、太在意他人眼光等原因而感到焦慮不安，那不妨參考看看 5 個心態調整的方法，這些是我自己也還在不斷練習的，讓我們一起與焦慮共處、更溫柔平衡的面對人生！。
 tags:

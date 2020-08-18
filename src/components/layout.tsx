@@ -7,6 +7,10 @@ import Header from "../components/Header"
 
 import { rhythm, scale } from "../utils/typography"
 
+const Root = styled.div`
+  background: #f6f2f1;
+`
+
 const Main = styled.main`
   padding: 112px 0;
   @media (max-width: 768px) {
@@ -75,7 +79,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     //     padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
     //   }}
     // >
-    <div className="LLLLL">
+    <Root className="root">
       <Head />
       <Header isScrollDown={isScrollDown} />
       <Main>
@@ -86,7 +90,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
         {` `}
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer>
-    </div>
+    </Root>
   )
 }
 

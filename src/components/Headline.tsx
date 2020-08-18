@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Tag from "./Tag"
 
 const Wrapper = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
   background: #f0ebe5;
@@ -36,6 +36,8 @@ const Info = styled.div`
     margin-bottom: 0;
     color: #484848;
     font-size: 22px;
+    font-family: "Helvetica", "Arial", "黑體-繁", "微軟正黑體",
+      "Microsoft JhengHei", sans-serif;
   }
   .description {
     margin-top: 16px;
@@ -82,6 +84,11 @@ const Cover = styled.div`
       top: 0;
       left: 0;
       opacity: 1;
+    }
+  }
+  @media (max-width: 1200px) {
+    .inner {
+      padding-top: 88%;
     }
   }
   @media (max-width: 992px) {

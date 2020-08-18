@@ -5,12 +5,16 @@ import styled from "styled-components"
 // import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Headerline from "../components/Headline"
+import PostGrid from "../components/PostGrid"
 
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-const Homepage = styled.div`
-  background: #fffaf4;
+const Home = styled.div`
+  .custom-row {
+    margin-right: 0;
+    margin-left: 0;
+  }
 `
 
 interface Props {
@@ -28,47 +32,32 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
 
   const latestPost = posts[0]
 
-  // console.log("posts", posts)
-
   return (
     <>
       <Layout location={location} title={siteTitle}>
         <SEO title="All posts" />
         {/* <Bio /> */}
-        <div className="row">
-          <Headerline
-            post={latestPost.node.frontmatter}
-            url={latestPost.node.fields.slug}
-          />
-          <Homepage>
-            {posts.map(({ node }) => {
-              const title = node.frontmatter.title || node.fields.slug
+
+        <Home>
+          <div className="row">
+            <Headerline
+              post={latestPost.node.frontmatter}
+              url={latestPost.node.fields.slug}
+            />
+          </div>
+          <div className="row custom-row">
+            {posts.slice(1).map(({ node }, index) => {
               return (
-                <article key={node.fields.slug}>
-                  <header>
-                    <h3
-                      style={{
-                        marginBottom: rhythm(1 / 4),
-                      }}
-                    >
-                      <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                        {title}
-                      </Link>
-                    </h3>
-                    <small>{node.frontmatter.date}</small>
-                  </header>
-                  <section>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: node.frontmatter.description || node.excerpt,
-                      }}
-                    />
-                  </section>
-                </article>
+                <PostGrid
+                  post={node.frontmatter}
+                  url={node.fields.slug}
+                  index={index}
+                  key={node.fields.slug}
+                />
               )
             })}
-          </Homepage>
-        </div>
+          </div>
+        </Home>
       </Layout>
     </>
   )
