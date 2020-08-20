@@ -1,4 +1,4 @@
-import React from "react"
+import React, { FC, useState } from "react"
 import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled from "styled-components"
@@ -6,10 +6,18 @@ import styled from "styled-components"
 import FadeInOut from "./FadeInOut"
 import Icon from "./Icon"
 import { SpaceBetween } from "./flexStyles"
+import Avatar from "./Avatar"
+import HamburgerButton from "./HamburgerButton"
+import PopupNav from "./PopupNav"
 
 const Wrapper = styled.div`
   box-shadow: 0 3px 0px -2px #cece4fb8;
   margin: 0 -2px;
+  background: #f6f2f1;
+  height: 60px;
+  @media (max-width: 768px) {
+    height: 50px;
+  }
 `
 
 const Title = styled.div`
@@ -30,28 +38,9 @@ const IconGroup = styled.div`
   }
 `
 
-const Avatar = styled.img`
-  margin: 1rem;
-  margin-right: 0;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  transition: transform 0.5s;
-  opacity: 1;
-  animation-name: fadeInOpacity;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-duration: 0.5s;
-  &:hover {
-    transform: scale(1.2);
-  }
-  @keyframes fadeInOpacity {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+const AvatarWrapper = styled.div`
+  a {
+    margin-left: 10px;
   }
 `
 
@@ -61,7 +50,11 @@ const GroupLeft = styled.div`
   align-items: center;
 `
 
-const GroupRight = styled.div``
+const GroupRight = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const GroupRight_Large = styled.div`
   display: flex;
@@ -73,92 +66,167 @@ const GroupRight_Large = styled.div`
 `
 
 const GroupRight_Small = styled.div`
-  display: block;
-  padding: 12px;
-  padding-top: 20px;
-  padding-right: 2px;
   cursor: pointer;
-  span {
-    display: block;
-    width: 32px;
-    height: 2px;
-    background-color: #007acc;
-    margin-bottom: 8px;
-    transition: all 0.3s;
-  }
-  &:hover {
-    span:nth-child(1) {
-      transform: translateX(20%);
-    }
-    span:nth-child(3) {
-      transform: translateX(-20%);
-    }
-  }
   @media (min-width: 769px) {
     display: none;
   }
 `
+
+const Nav = styled.nav`
+  position: absolute;
+  left: 248px;
+  top: 50%;
+  transform: translateY(-50%);
+  a {
+    padding: 10px;
+    margin-right: 16px;
+    letter-spacing: 1px;
+    color: #656565;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.04);
+      color: #484848;
+    }
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const headerTransitionStyles = {
+  entering: { transform: "translateY(-100%)" },
+  entered: { transform: "translateY(0)" }, // Transition to component being visible and having its position reset.
+  exiting: { transform: "translateY(-100%)" }, // Fade element out and slide it back up on exit.
+}
+
+const headerDefaultStyles = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  zIndex: 500,
+  display: "block",
+  transform: headerTransitionStyles.entered,
+  transition: "all 0.3s ease",
+}
+
+const popupNavTransitionStyles = {
+  entering: { transform: "translateX(0%)" },
+  entered: { transform: "translateX(100%)" },
+  exiting: { transform: "translateX(0%)" },
+}
+
+const popupNavDefaultStyles = {
+  position: "fixed",
+  top: 0,
+  right: 0,
+  bottom: 0,
+  zIndex: 500,
+  display: "block",
+  transform: popupNavTransitionStyles.entered,
+  transition: "all 0.3s ease",
+}
 
 interface Props {
   // location: Location
   isScrollDown: Boolean
 }
 
-function isEqual() {
-  console.log("isEqual")
-  return true
+const Header: FC<Props> = ({ isScrollDown }) => {
+  const [isHidePopupNav, togglePopupNav] = useState(true)
+  const handlePopupMenu = () => {
+    togglePopupNav(!isHidePopupNav)
+  }
+  const locked = true
+  return (
+    <FadeInOut
+      toggle={isHidePopupNav ? !isScrollDown : locked}
+      transitionStyles={headerTransitionStyles}
+      defaultStyles={headerDefaultStyles}
+    >
+      <div className="container">
+        <Wrapper>
+          <SpaceBetween>
+            <GroupLeft>
+              <Link
+                to="/"
+                onClick={() => {
+                  ReactGA.event({
+                    category: "User",
+                    action: "Click navbar logo",
+                  })
+                }}
+              >
+                <Title>
+                  Coding By
+                  <span style={{ color: "#f98686e6" }}> C</span>
+                  <span style={{ color: "#f3b157de" }}>O</span>
+                  <span style={{ color: "#faead3" }}>L</span>
+                  <span style={{ color: "#5fbf5fe8" }}>O</span>
+                  <span style={{ color: "#7272f7e6" }}>R</span>
+                  <span style={{ color: "#f97af9e6" }}>S</span>
+                </Title>
+              </Link>
+            </GroupLeft>
+            <Nav>
+              <Link
+                to="/develop_tweet"
+                onClick={() => {
+                  ReactGA.event({
+                    category: "User",
+                    action: "Click navbar logo",
+                  })
+                }}
+              >
+                Develop tweet
+              </Link>
+              <Link
+                to="/tags"
+                onClick={() => {
+                  ReactGA.event({
+                    category: "User",
+                    action: "Click navbar logo",
+                  })
+                }}
+              >
+                Tags
+              </Link>
+            </Nav>
+            <GroupRight>
+              <GroupRight_Large>
+                <IconGroup>
+                  <Icon
+                    href={`https://github.com/linyujo`}
+                    icon={["fab", "github"]}
+                  />
+                </IconGroup>
+                <AvatarWrapper>
+                  <Link to="/">
+                    <Avatar
+                      src="/images/avatar.jpg"
+                      alt="Raine"
+                      width={40}
+                      height={40}
+                    />
+                  </Link>
+                </AvatarWrapper>
+              </GroupRight_Large>
+              <GroupRight_Small>
+                <HamburgerButton handleClick={handlePopupMenu} />
+                <FadeInOut
+                  toggle={isHidePopupNav}
+                  defaultStyles={popupNavDefaultStyles}
+                  transitionStyles={popupNavTransitionStyles}
+                >
+                  <PopupNav />
+                </FadeInOut>
+              </GroupRight_Small>
+            </GroupRight>
+          </SpaceBetween>
+        </Wrapper>
+      </div>
+    </FadeInOut>
+  )
 }
-
-const Header: React.FC<Props> = ({ isScrollDown }) => (
-  <FadeInOut inCondition={!isScrollDown}>
-    <div className="container">
-      <Wrapper>
-        <SpaceBetween>
-          <GroupLeft>
-            <Link
-              to="/"
-              onClick={() => {
-                ReactGA.event({
-                  category: "User",
-                  action: "Click navbar logo",
-                })
-              }}
-            >
-              <Title>
-                Coding By
-                <span style={{ color: "#f98686e6" }}> C</span>
-                <span style={{ color: "#f3b157de" }}>O</span>
-                <span style={{ color: "#faead3" }}>L</span>
-                <span style={{ color: "#5fbf5fe8" }}>O</span>
-                <span style={{ color: "#7272f7e6" }}>R</span>
-                <span style={{ color: "#f97af9e6" }}>S</span>
-              </Title>
-            </Link>
-          </GroupLeft>
-          <GroupRight>
-            <GroupRight_Large>
-              <IconGroup>
-                <Icon
-                  href={`https://github.com/linyujo`}
-                  icon={["fab", "github"]}
-                />
-              </IconGroup>
-              <div>
-                <Link to="/">
-                  <Avatar src="/images/avatar.jpg" alt="Raine" />
-                </Link>
-              </div>
-            </GroupRight_Large>
-            <GroupRight_Small>
-              <span></span>
-              <span></span>
-              <span></span>
-            </GroupRight_Small>
-          </GroupRight>
-        </SpaceBetween>
-      </Wrapper>
-    </div>
-  </FadeInOut>
-)
 
 export default Header

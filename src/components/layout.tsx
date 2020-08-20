@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState, FC } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
 import Head from "./Head"
 import Header from "../components/Header"
+import ScrollWrapper from "./ScrollWrapper"
 
 import { rhythm, scale } from "../utils/typography"
 
@@ -23,7 +24,7 @@ interface Props {
   title: string
 }
 
-const Layout: React.FC<Props> = ({ location, title, children }) => {
+const Layout: FC<Props> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
 
@@ -68,28 +69,19 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     )
   }
 
-  const [isScrollDown, toggleScrollDown] = React.useState(false)
-
   return (
-    // <div
-    //   style={{
-    //     marginLeft: `auto`,
-    //     marginRight: `auto`,
-    //     maxWidth: rhythm(24),
-    //     padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-    //   }}
-    // >
     <Root className="root">
       <Head />
-      <Header isScrollDown={isScrollDown} />
-      <Main>
-        <div className="container">{children}</div>
-      </Main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
+      <ScrollWrapper>
+        {({ isScrollDown }) => (
+          <>
+            <Header isScrollDown={isScrollDown} />
+            <Main>
+              <div className="container">{children}</div>
+            </Main>
+          </>
+        )}
+      </ScrollWrapper>
     </Root>
   )
 }

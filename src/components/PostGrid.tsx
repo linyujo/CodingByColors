@@ -72,6 +72,7 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     flex: 0 0 100%;
     max-width: 100%;
+    margin-bottom: 40px;
     &.reversed {
       flex-direction: column;
     }
@@ -118,6 +119,7 @@ const Info = styled.div`
   @media (max-width: 768px) {
     .info-wrapper {
       padding-top: 0;
+      background: #f0ebe6;
     }
     .info-content {
       position: relative;
