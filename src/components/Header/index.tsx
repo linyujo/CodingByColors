@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, memo } from "react"
 import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled, { css } from "styled-components"
@@ -44,15 +44,24 @@ const DefaultHeader: FC<DefaultHeaderProps> = () => {
 }
 
 interface HeaderProps {
+  pathname: string
   templateKey: string
   post?: {
     title: string
+    subject: string
     date: string
     tags: Array<string>
   }
 }
 
-const Header: FC<HeaderProps> = ({ templateKey, post }) => {
+const preventUpdateMemo = (prevProps, nextProps) => {
+  if (prevProps.pathname === nextProps.pathname) {
+    return true
+  }
+  return false
+}
+
+const Header: FC<HeaderProps> = memo(({ templateKey, post }) => {
   let header
   if (templateKey !== "blog-post") {
     header = <DefaultHeader />
@@ -60,6 +69,6 @@ const Header: FC<HeaderProps> = ({ templateKey, post }) => {
     header = <BlogPostHeader post={post} />
   }
   return header
-}
+}, preventUpdateMemo)
 
 export default Header

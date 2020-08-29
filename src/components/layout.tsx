@@ -27,6 +27,7 @@ interface Props {
   templateKey?: string
   post?: {
     title: string
+    subject: string
     date: string
     tags: Array<string>
   }
@@ -86,10 +87,15 @@ const Layout: FC<Props> = ({ location, templateKey, post, children }) => {
         <ScrollWrapper>
           {({ isScrollDown, currentY }) => (
             <>
-              <Header templateKey={templateKey} post={post} />
+              <Header
+                pathname={location.pathname}
+                templateKey={templateKey}
+                post={post}
+              />
               <FloatHeader
                 isScrollDown={isScrollDown}
                 scrollPosition={currentY}
+                pathname={location.pathname}
                 templateKey={templateKey}
                 post={post}
               />

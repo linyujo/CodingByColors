@@ -17,9 +17,6 @@ const Article = styled.article`
   @media (max-width: 1140px) {
     padding: 0 30px 30px 30px;
   }
-  section {
-    /* margin-top: 480px; */
-  }
   p,
   h1,
   h2,
@@ -79,11 +76,6 @@ const Article = styled.article`
     color: #777;
     border-left: 0.25em solid #ddd;
     margin: 0 0 16px 0;
-    /* p {
-      display: block;
-      unicode-bidi: embed;
-      white-space: pre-wrap;
-		} */
     code[class*="language-"] {
       color: inherit;
     }

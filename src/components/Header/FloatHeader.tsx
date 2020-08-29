@@ -38,6 +38,7 @@ const headerDefaultStyles = {
 interface Props {
   isScrollDown: Boolean
   scrollPosition: number
+  pathname: string
   templateKey: string
   post?: {
     title: string
@@ -46,7 +47,7 @@ interface Props {
   }
 }
 
-const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition }) => {
+const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition, pathname }) => {
   const [isHidePopupNav, togglePopupNav] = useState(true)
   const handlePopupMenu = () => {
     togglePopupNav(!isHidePopupNav)
@@ -72,7 +73,7 @@ const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition }) => {
         <Wrapper>
           <SpaceBetween>
             <LogoLink />
-            <Nav />
+            <Nav pathname={pathname} />
             <RightGroup
               isHidePopupNav={isHidePopupNav}
               togglePopupNav={handlePopupMenu}

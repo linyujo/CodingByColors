@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, memo } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -82,20 +82,30 @@ interface Props {
   isHidePopupNav: Boolean
 }
 
-const RightGroup: React.FC<Props> = ({ togglePopupNav, isHidePopupNav }) => {
-  const { browserWidth } = useContext(LayoutContext)
-  let component
-  if (browserWidth > 768) {
-    component = <Icons />
-  } else {
-    component = (
-      <Hamburger
-        isHidePopupNav={isHidePopupNav}
-        togglePopupNav={togglePopupNav}
-      />
-    )
+const preventUpdateMemo = (prevProps, nextProps) => {
+  if (prevProps.isHidePopupNav === nextProps.isHidePopupNav) {
+    return true
   }
-  return <Centre>{component}</Centre>
+  return false
 }
+
+const RightGroup: React.FC<Props> = memo(
+  ({ togglePopupNav, isHidePopupNav }) => {
+    const { browserWidth } = useContext(LayoutContext)
+    let component
+    if (browserWidth > 768) {
+      component = <Icons />
+    } else {
+      component = (
+        <Hamburger
+          isHidePopupNav={isHidePopupNav}
+          togglePopupNav={togglePopupNav}
+        />
+      )
+    }
+    return <Centre>{component}</Centre>
+  },
+  preventUpdateMemo
+)
 
 export { Icons, Hamburger, RightGroup as default }

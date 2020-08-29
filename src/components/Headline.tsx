@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -120,7 +120,14 @@ interface Props {
   url: string
 }
 
-const Headerline: React.FC<Props> = ({ post, url }) => {
+const preventUpdateMemo = (prevProps, nextProps) => {
+  if (prevProps.url === nextProps.url) {
+    return true
+  }
+  return false
+}
+
+const Headerline: React.FC<Props> = memo(({ post, url }) => {
   return (
     <div className="col-sm-12">
       <Wrapper>
@@ -144,6 +151,6 @@ const Headerline: React.FC<Props> = ({ post, url }) => {
       </Wrapper>
     </div>
   )
-}
+}, preventUpdateMemo)
 
 export default Headerline

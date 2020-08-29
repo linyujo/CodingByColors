@@ -6,10 +6,6 @@ import styled from "styled-components"
 import FadeInOut from "./FadeInOut"
 import Icon from "./Icon"
 import Avatar from "./Avatar"
-import {
-  initialState as popupNavInitialState,
-  reducer as popupNavReducer,
-} from "../reducers/popupNav"
 
 const Wrapper = styled.nav`
   width: 50vw;

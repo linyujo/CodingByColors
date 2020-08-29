@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, memo } from "react"
 import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled from "styled-components"
@@ -28,33 +28,45 @@ const NavWrapper = styled.nav`
   }
 `
 
-interface NavProps {}
+interface NavProps {
+  pathname: string
+}
 
-const Nav: React.FC<NavProps> = () => (
-  <NavWrapper>
-    <Link
-      to="/develop_tweet"
-      onClick={() => {
-        ReactGA.event({
-          category: "User",
-          action: "Click navbar logo",
-        })
-      }}
-    >
-      Develop tweet
-    </Link>
-    <Link
-      to="/tags"
-      onClick={() => {
-        ReactGA.event({
-          category: "User",
-          action: "Click navbar logo",
-        })
-      }}
-    >
-      Tags
-    </Link>
-  </NavWrapper>
+const preventUpdateMemo = (prevProps, nextProps) => {
+  if (prevProps.pathname === nextProps.pathname) {
+    return true
+  }
+  return false
+}
+
+const Nav: React.FC<NavProps> = memo(
+  () => (
+    <NavWrapper>
+      <Link
+        to="/develop_tweet"
+        onClick={() => {
+          ReactGA.event({
+            category: "User",
+            action: "Click navbar logo",
+          })
+        }}
+      >
+        Develop tweet
+      </Link>
+      <Link
+        to="/tags"
+        onClick={() => {
+          ReactGA.event({
+            category: "User",
+            action: "Click navbar logo",
+          })
+        }}
+      >
+        Tags
+      </Link>
+    </NavWrapper>
+  ),
+  preventUpdateMemo
 )
 
 /**
