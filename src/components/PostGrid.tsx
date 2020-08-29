@@ -119,11 +119,12 @@ const Info = styled.div`
   @media (max-width: 768px) {
     .info-wrapper {
       padding-top: 0;
-      background: #f0ebe6;
+      /* background: #f0ebe6; */
     }
     .info-content {
       position: relative;
       padding: 40px;
+      text-align: center;
     }
   }
   @media (max-width: 576px) {

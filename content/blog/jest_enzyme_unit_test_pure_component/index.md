@@ -1,8 +1,8 @@
 ---
 id: 20190725r
 slug: /jest_enzyme_unit_test_pure_component
+subject: 用Jest和Enzyme寫React測試
 title: 不用跟Redux連接的Component
-subTitle:
 date: 2019-07-25T12:00:00Z
 description: 先寫測試程式，然後才實作功能，是最近發起的一種程式開發思維。無論是否百分之百實行測試驅動開發(TDD)，程序猿可以從中學習到如何撰寫好的自動化測試，怎樣設計軟體可以更模組化、更容易擴充，以及設計出好用的 API 介面。
 tags:
@@ -21,7 +21,7 @@ templateKey: blog-post
 ![尚未猜中的畫面](https://imgur.com/BmPects.jpg)
 玩家在 Input 輸入框任意輸入單字，
 下方表格會列出玩家曾輸入的所有單字，並提示 match 的字母有幾個。
-  
+
 ![猜中的畫面](https://imgur.com/nPIQx5n.jpg)
 玩家猜中單字後，原有的輸入框消失。顯示恭喜通關的文字。
 

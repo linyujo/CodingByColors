@@ -15,14 +15,14 @@ interface Props {
     }
   }
   defaultStyles: {
-    position: string
+    position?: string
     top?: number
     left?: number
     right?: number
     bottom?: number
-    zIndex: number
-    display: string
-    transform: {
+    zIndex?: number
+    display?: string
+    transform?: {
       transform: string
     }
     transition: string

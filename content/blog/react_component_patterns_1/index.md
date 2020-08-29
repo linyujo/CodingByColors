@@ -1,8 +1,8 @@
 ---
 id: 20191229J
 slug: /react_component_patterns_1
+subject: React共用Component的設計模式
 title: Compound Components
-subTitle:
 date: 2019-12-29T1:00:00Z
 description: 工作上收到設計稿時，我習慣先和組員討論，哪些元件有可能會被重複使用？由於最近上頭同意大幅重構，在後台系統的頁面有87%元件是相似的情況下，同事組裝元件的方式也大同小異，他們希望我為主畫面設計一個Template，減少拼裝元件的時間。
 tags:
@@ -11,9 +11,6 @@ tags:
 headerImage: "https://imgur.com/TYdA1P9.jpg"
 templateKey: blog-post
 ---
-
-###### tags `React` `React Component Patterns`
-
 初學 React 時，只會用一種方式嵌套多個 Component：從最大的 Component，包住較小的 Component，像是 N 層俄羅斯娃娃一般。
 
 ```jsx
@@ -35,8 +32,8 @@ templateKey: blog-post
 ```
 
 工作上收到設計稿時，我習慣先和組員討論，哪些元件有可能會被重複使用？
-我習慣從最小的 Component 開始做起，接著做比較大的容器，再請組員們自己將 Component 組合成他們需要的頁面。
-在有技術債包袱的專案中，我無法要求組員重構骨架，只能刻好 Component、提供適當的接口，以"_先研究不傷身體，再講求效果_"的精神替換元件。
+我習慣從最小的Component開始做起，接著做比較大的容器，再請組員們自己將Component組合成他們需要的頁面。
+在有技術債包袱的專案中，我無法要求組員重構骨架，只能刻好Component、提供適當的接口，以"*先研究不傷身體，再講求效果*"的精神替換元件。
 
 由於最近上頭同意大幅重構，在後台系統的頁面有 87%元件是相似的情況下，同事組裝元件的方式也大同小異，他們希望我為主畫面設計一個 Template，減少拼裝元件的時間。
 
@@ -55,7 +52,7 @@ templateKey: blog-post
 </PageOne>
 ```
 
-把需要的資料都用 props 傳進 Component 就好了惹～
+把需要的資料都用props傳進Component就好了惹～
 但這樣會有幾個顯而易見的問題：
 
 1. 無法從外觀看出 Template 的用途，及其中的內容

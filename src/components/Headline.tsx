@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   }
   @media (max-width: 800px) {
     flex-direction: column-reverse;
+    background: none;
   }
 `
 
@@ -36,7 +37,7 @@ const Info = styled.div`
     margin-bottom: 0;
     color: #484848;
     font-size: 22px;
-    font-family: "Helvetica", "Arial", "黑體-繁", "微軟正黑體",
+    font-family: "Helvetica", "Arial", "Noto Sans TC", "黑體-繁", "微軟正黑體",
       "Microsoft JhengHei", sans-serif;
   }
   .description {
@@ -45,6 +46,9 @@ const Info = styled.div`
     line-height: 1.4;
     font-size: 16px;
     color: #656565;
+  }
+  @media (max-width: 768px) {
+    text-align: center;
   }
   @media (max-width: 576px) {
     margin: 20px;

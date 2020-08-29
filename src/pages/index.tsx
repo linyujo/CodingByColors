@@ -11,6 +11,10 @@ import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
 const Home = styled.div`
+  padding: 64px 0;
+  @media (max-width: 768px) {
+    padding: 48px 0;
+  }
   .custom-row {
     margin-right: 0;
     margin-left: 0;
@@ -27,18 +31,17 @@ interface Props {
 }
 
 const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+  // const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 
   const latestPost = posts[0]
 
   return (
-    <>
-      <Layout location={location} title={siteTitle}>
-        <SEO title="All posts" />
-        {/* <Bio /> */}
-
-        <Home>
+    <Layout location={location}>
+      <SEO title="All posts" />
+      {/* <Bio /> */}
+      <Home>
+        <div className="container">
           <div className="row">
             <Headerline
               post={latestPost.node.frontmatter}
@@ -57,9 +60,9 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
               )
             })}
           </div>
-        </Home>
-      </Layout>
-    </>
+        </div>
+      </Home>
+    </Layout>
   )
 }
 
@@ -81,6 +84,7 @@ export const pageQuery = graphql`
           }
           frontmatter {
             date(formatString: "YY.MM.DD")
+            subject
             title
             description
             tags

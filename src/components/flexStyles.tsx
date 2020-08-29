@@ -7,4 +7,10 @@ const SpaceBetween = styled.div`
   height: inherit;
 `
 
-export { SpaceBetween }
+const Centre = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export { SpaceBetween, Centre }

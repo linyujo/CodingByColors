@@ -5,9 +5,10 @@ interface Props {
 }
 
 const ScrollWrapper: FC<Props> = ({ children }) => {
-  const [isScrollDown, toggleScrollDown] = useState(false)
+  const [isScrollDown, toggleScrollDown] = useState(true)
   const [isLocked, toggleLocked] = useState(false)
   const [lastY, saveLastY] = useState(0) // keep the lastest Y position
+  const [currentY, saveCurrentY] = useState(0) // keep the current Y position
 
   let lastCall = null
 
@@ -31,7 +32,9 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
     }
     lastCall = setTimeout(() => {
       // get the current Y position
-      let currentY = Math.abs(wrapper.offsetTop - window.scrollY)
+
+      // let currentY = Math.abs(wrapper.offsetTop - window.scrollY)
+      saveCurrentY(Math.abs(wrapper.offsetTop - window.scrollY))
 
       if (handleScrollDown) {
         // "The current Y position > 0" && "The latest Y position < the current Y position
@@ -42,12 +45,19 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
           // "Scrolling UP"
           toggleScrollDown(false)
         }
+        // if (currentY > 0 && lastY <= currentY) {
+        //   toggleScrollDown(true)
+        // }
+        // if (currentY > 0 && lastY - currentY > 50) {
+        //   toggleScrollDown(false)
+        // }
         saveLastY(currentY)
       }
-    }, 200)
+    }, 150)
 
     toggleLocked(false)
   }
+
   useEffect(() => {
     window.addEventListener("scroll", scrolling)
     // returned function will be called on component unmount
@@ -58,7 +68,7 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
 
   return (
     <div className="scroll-wrapper" ref={wrapperElement}>
-      {children({ isScrollDown })}
+      {children({ isScrollDown, currentY })}
     </div>
   )
 }
