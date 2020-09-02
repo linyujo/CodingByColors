@@ -4,7 +4,7 @@ import styled from "styled-components"
 import EventLink from "../EventLink"
 import { ArrowLeft } from "../AnimateIcons"
 
-import Tag from "../Tag"
+import { Tag } from "../Tag"
 
 const PostHeader = styled.header`
   width: 100vw;

@@ -2,7 +2,7 @@ import React, { memo } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
-import Tag from "./Tag"
+import { Tag } from "./Tag"
 
 const Wrapper = styled.div`
   margin-bottom: 40px;

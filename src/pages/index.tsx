@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import Headerline from "../components/Headline"
 import PostGrid from "../components/PostGrid"
+import HomeImage from "../components/HomeImage"
 
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
@@ -41,6 +42,7 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
       <SEO title="All posts" />
       {/* <Bio /> */}
       <Home>
+        <HomeImage />
         <div className="container">
           <div className="row">
             <Headerline

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"
 import { Link } from "gatsby"
 
 import SquareImage from "./SquareImage"
-import Tag from "./Tag"
+import { Tag } from "./Tag"
 
 const pseudoTriangle = css`
   content: "";
