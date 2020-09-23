@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 64px;
   .image-wrapper {
-    max-width: 840px;
+    /* max-width: 840px; */
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -17,22 +17,34 @@ const Wrapper = styled.div`
       top: 0;
       left: 0;
       background-repeat: no-repeat;
-      background-position: left center;
+      background-position: initial;
       background-size: cover;
+      &:after {
+        content: "";
+        background: #c3c3c370;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
   }
   .image-ratio {
     width: 100%;
-    padding-top: 75%;
+    padding-top: 50%;
+    /* padding-top: 75%; */
   }
   * {
     font-family: "Architects Daughter", cursive;
   }
   .heading-wrapper {
     position: absolute;
-    top: 50%;
-    right: 6%;
-    transform: translate(-6%, -50%);
+    /* top: 50%; */
+    /* right: 6%; */
+    top: 20%;
+    left: 58%;
+    transform: translate(-58%, -20%);
     text-align: center;
     h1 {
       font-size: 80px;
@@ -68,12 +80,12 @@ interface Props {}
 
 const HomeImage: React.FC<Props> = () => (
   <Wrapper>
-    <div className="container">
+    <div className="">
       <div className="image-wrapper">
         <div className="image-ratio">
           <div
             className="image"
-            style={{ backgroundImage: ` url(/images/crayon.jpg)` }}
+            style={{ backgroundImage: ` url(/images/rainbow_island.jpg)` }}
           ></div>
           <div className="heading-wrapper">
             <h1 className="firstLine">Coding By</h1>

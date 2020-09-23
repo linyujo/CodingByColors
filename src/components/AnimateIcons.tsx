@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Icon, { css } from "./Icon"
+import Icon from "./Icon"
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
 
 const Left = styled.span`

@@ -53,14 +53,18 @@ button {
 /*
  * Override bootstrap-grid
  */
-.container {
-  @media (max-width: 992px) {
+@media (max-width: 992px) {
+  .container {
     max-width: calc(100% - 64px);
   }
-  @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+  .container {
     max-width: calc(100% - 64px);
   }
-  @media (max-width: 576px) {
+}
+@media (max-width: 576px) {
+  .container {
     max-width: calc(100% - 32px);
   }
 }

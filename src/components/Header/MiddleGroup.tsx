@@ -10,17 +10,23 @@ import styled from "styled-components"
 const NavWrapper = styled.nav`
   position: absolute;
   left: 248px;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 100%;
   a {
+    height: 100%;
     padding: 10px;
     margin-right: 16px;
     letter-spacing: 1px;
+    line-height: 42px;
     color: #656565;
     transition: all 0.2s;
     &:hover {
       transform: scale(1.04);
       color: #484848;
+    }
+    &.active {
+      transform: scale(1.04);
+      color: #484848;
+      background: #fefefe;
     }
   }
   @media (max-width: 768px) {
@@ -40,18 +46,19 @@ const preventUpdateMemo = (prevProps, nextProps) => {
 }
 
 const Nav: React.FC<NavProps> = memo(
-  () => (
+  ({ pathname }) => (
     <NavWrapper>
       <Link
-        to="/develop_tweet"
+        to="/tweets"
         onClick={() => {
           ReactGA.event({
             category: "User",
             action: "Click navbar logo",
           })
         }}
+        className={pathname.includes("/tweets") ? "active" : ""}
       >
-        Develop tweet
+        Working Tweets
       </Link>
       <Link
         to="/tags"
@@ -61,6 +68,7 @@ const Nav: React.FC<NavProps> = memo(
             action: "Click navbar logo",
           })
         }}
+        className={pathname.includes("/tags") ? "active" : ""}
       >
         Tags
       </Link>

@@ -4,6 +4,7 @@ import {
   faChevronUp,
   faChevronLeft,
   faChevronRight,
+  faBookmark,
 } from "@fortawesome/free-solid-svg-icons"
 import { faEnvelope, faComment } from "@fortawesome/free-regular-svg-icons"
 import {
@@ -24,7 +25,8 @@ const installFontAwesome = () => {
     faFacebookF,
     faFacebook,
     faChevronLeft,
-    faChevronRight
+    faChevronRight,
+    faBookmark
   )
 }
 

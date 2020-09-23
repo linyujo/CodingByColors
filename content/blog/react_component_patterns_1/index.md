@@ -6,16 +6,16 @@ title: Compound Components
 date: 2019-12-29T1:00:00Z
 description: 工作上收到設計稿時，我習慣先和組員討論，哪些元件有可能會被重複使用？由於最近上頭同意大幅重構，在後台系統的頁面有87%元件是相似的情況下，同事組裝元件的方式也大同小異，他們希望我為主畫面設計一個Template，減少拼裝元件的時間。
 tags:
-  - React
   - React Component Patterns
+  - React
 headerImage: "https://imgur.com/TYdA1P9.jpg"
 templateKey: blog-post
 ---
 初學 React 時，只會用一種方式嵌套多個 Component：從最大的 Component，包住較小的 Component，像是 N 層俄羅斯娃娃一般。
 
-```jsx
+```html
 <App>
-  <Header />
+	<Header />
   <Body>
     <Nav>
       <Ul>
@@ -83,7 +83,7 @@ Kent C. Dodds 在前端教學網站 egghead 提供了幾個 react 設計模式�
 
 React.Children.map 的缺點是，它是用 for 迴圈的方式，將父容器的資料以 props 傳給**第一層**的子元件。只要其中一個子元件被一層`<div>`包住，資料將會注入第一層的`<div>`，而非該元件。範例如下：
 
-```jsx
+```
 return (
   <CustomSelect // 父容器
     label="Manager"
@@ -94,15 +94,15 @@ return (
       value: "manager",
     }}
   >
-    {stuffList.map(option => (
-      <div>
-        {" "}
-        {/* 在 CustomSelect 外面再包一層 */} {/* CustomSelect將無法拿到父容器的filterOption */}
-        <CustomSelect.Option element={option} key={option.name}>
-          {option.name}
-        </CustomSelect.Option>
-      </div>
-    ))}
+		{stuffList.map(option => (
+			<div>
+				{/* 在 CustomSelect 外面再包一層 */}
+				{/* CustomSelect將無法拿到父容器的filterOption */}
+				<CustomSelect.Option element={option} key={option.name}>
+					{option.name}
+				</CustomSelect.Option>
+			</div>
+		))}
   </CustomSelect>
 )
 ```

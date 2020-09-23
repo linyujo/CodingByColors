@@ -12,7 +12,7 @@ import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
 const Home = styled.div`
-  padding: 64px 0;
+  padding: 0 0 64px 0;
   @media (max-width: 768px) {
     padding: 48px 0;
   }
@@ -33,6 +33,9 @@ interface Props {
 
 const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
   // const siteTitle = data.site.siteMetadata.title
+
+  console.log("data", data)
+
   const posts = data.allMarkdownRemark.edges
 
   const latestPost = posts[0]
@@ -44,7 +47,7 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
       <Home>
         <HomeImage />
         <div className="container">
-          <div className="row">
+          <div className="row custom-row">
             <Headerline
               post={latestPost.node.frontmatter}
               url={latestPost.node.fields.slug}
@@ -77,7 +80,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           excerpt

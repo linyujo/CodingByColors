@@ -3,7 +3,8 @@ import styled, { css } from "styled-components"
 import { Link } from "gatsby"
 
 import SquareImage from "./SquareImage"
-import { Tag } from "./Tag"
+import Tag from "./Tag/Tag"
+import { image, postGridInfo } from "../styles/common-css"
 
 const pseudoTriangle = css`
   content: "";
@@ -19,6 +20,30 @@ const pseudoTriangle = css`
   }
 `
 
+const puzzlePieceTop = css`
+  content: "";
+  background: #f6f2f1;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  top: -1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4em;
+`
+
+const puzzlePieceBottom = css`
+  content: "";
+  background: #f6f2f1;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  bottom: -1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4em;
+`
+
 const Wrapper = styled.div`
   flex: 0 0 33.33333%;
   max-width: 33.33333%;
@@ -26,23 +51,18 @@ const Wrapper = styled.div`
   flex-direction: column;
   .info {
     &:before {
-      ${pseudoTriangle};
-      border-width: 0 20px 20px 20px;
-      border-color: transparent transparent #f6f2f1 transparent;
-      top: -20px;
+      ${puzzlePieceTop};
     }
   }
   &.reversed {
     flex-direction: column-reverse;
     .info {
       &:before {
-        ${pseudoTriangle};
+        ${puzzlePieceTop};
         content: none;
       }
       &:after {
-        ${pseudoTriangle};
-        border-width: 20px 20px 0 20px;
-        border-color: #f6f2f1 transparent transparent transparent;
+        ${puzzlePieceBottom};
       }
     }
   }
@@ -50,14 +70,7 @@ const Wrapper = styled.div`
     width: 100%;
     display: block;
     &:after {
-      content: "";
-      background: rgba(101, 101, 101, 0.3);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 1;
+      ${image.grayLayer}
     }
     &:hover {
       .image {
@@ -75,6 +88,16 @@ const Wrapper = styled.div`
     margin-bottom: 40px;
     &.reversed {
       flex-direction: column;
+      .info {
+        &:after {
+          content: none;
+        }
+      }
+    }
+    .info {
+      &:before {
+        content: none;
+      }
     }
   }
 `
@@ -98,28 +121,18 @@ const Info = styled.div`
     padding: 20px;
   }
   .date {
+    ${postGridInfo.date}
     color: #bbb4b5;
-    margin-bottom: 16px;
   }
   .title {
-    margin-top: 0;
-    margin-bottom: 0;
-    color: #484848;
-    font-size: 22px;
-    font-family: "Helvetica", "Arial", "黑體-繁", "微軟正黑體",
-      "Microsoft JhengHei", sans-serif;
+    ${postGridInfo.title}
   }
   .description {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    line-height: 1.4;
-    font-size: 16px;
-    color: #656565;
+    ${postGridInfo.description}
   }
   @media (max-width: 768px) {
     .info-wrapper {
       padding-top: 0;
-      /* background: #f0ebe6; */
     }
     .info-content {
       position: relative;
@@ -130,9 +143,6 @@ const Info = styled.div`
   @media (max-width: 576px) {
     .info-content {
       padding: 20px;
-    }
-    .title {
-      font-size: 18px;
     }
   }
 `

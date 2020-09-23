@@ -1,24 +1,15 @@
 import React from "react"
 import styled from "styled-components"
 
+import { image } from "../styles/common-css"
+
 const Wrapper = styled.div`
-  width: 100%;
-  overflow: hidden;
+  ${image.wrapper}
   .inner {
-    width: 100%;
-    padding-top: 100%;
+    ${image.inner}
   }
   .image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    transition: all 0.3s;
+    ${image.itself}
   }
 `
 

@@ -51,7 +51,7 @@ const Article = styled.article`
   }
   p {
     margin-bottom: 28px;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.5;
     letter-spacing: 0.025em;
     display: block;
@@ -65,9 +65,9 @@ const Article = styled.article`
   }
   ol {
     padding-left: 2em;
-    @media (max-width: 576px) {
+    /* @media (max-width: 576px) {
       padding-left: 0;
-    }
+    } */
   }
   blockquote {
     font-size: 16px;
@@ -94,8 +94,9 @@ const Article = styled.article`
           monospace;
       }
     }
-    code {
+    code[class*="language-"] {
       font-size: 16px;
+      tab-size: 2;
       .token.punctuation {
         padding: 0.1em;
       }

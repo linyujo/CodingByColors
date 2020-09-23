@@ -1,0 +1,7 @@
+{
+  "urlBackground": {
+    "/tags": "/images/library.jpg",
+    "/tweets": "/images/diary.jpg",
+    "default": "/images/default.jpg"
+  }
+}

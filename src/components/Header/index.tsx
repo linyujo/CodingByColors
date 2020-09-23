@@ -19,9 +19,11 @@ const Wrapper = styled.header`
   }
 `
 
-interface DefaultHeaderProps {}
+interface DefaultHeaderProps {
+  pathname: string
+}
 
-const DefaultHeader: FC<DefaultHeaderProps> = () => {
+const DefaultHeader: FC<DefaultHeaderProps> = ({ pathname }) => {
   const [isHidePopupNav, togglePopupNav] = useState(true)
   const handlePopupMenu = () => {
     togglePopupNav(!isHidePopupNav)
@@ -32,7 +34,7 @@ const DefaultHeader: FC<DefaultHeaderProps> = () => {
       <Wrapper>
         <SpaceBetween>
           <LogoLink />
-          <Nav />
+          <Nav pathname={pathname} />
           <RightGroup
             isHidePopupNav={isHidePopupNav}
             togglePopupNav={handlePopupMenu}
@@ -61,10 +63,10 @@ const preventUpdateMemo = (prevProps, nextProps) => {
   return false
 }
 
-const Header: FC<HeaderProps> = memo(({ templateKey, post }) => {
+const Header: FC<HeaderProps> = memo(({ pathname, templateKey, post }) => {
   let header
   if (templateKey !== "blog-post") {
-    header = <DefaultHeader />
+    header = <DefaultHeader pathname={pathname} />
   } else {
     header = <BlogPostHeader post={post} />
   }

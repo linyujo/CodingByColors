@@ -63,7 +63,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
         <ul>
           <li>
             <Link
-              to="/develop_tweet"
+              to="/tweets"
               onClick={() => {
                 ReactGA.event({
                   category: "User",
@@ -71,7 +71,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
                 })
               }}
             >
-              Develop tweet
+              Working Tweets
             </Link>
           </li>
           <li>
