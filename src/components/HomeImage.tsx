@@ -1,107 +1,171 @@
-import React from "react"
+import React, { useEffect, useState, useContext } from "react"
 import styled from "styled-components"
+import WaterWave from "react-water-wave"
+
+import Clock from "./Clock"
+
+import { useWindowWidth } from "../hooks/windowHooks"
+import { getBrowserWidth } from "../utils/browserUtils"
+import { LayoutContext } from "../components/layout"
+import { image } from "../styles/common-css"
+
+const background: string = require("../../static/images/rain.jpg")
+
+const LargeWindow: React.FC<{}> = () => {
+  const { isUserIdle } = useContext(LayoutContext)
+  return (
+    <WaterWave
+      style={{
+        width: "100%",
+        height: "100%",
+        backgroundSize: "cover",
+      }}
+      imageUrl={background}
+    >
+      {({ drop }) => {
+        return (
+          <Clock
+            width={360}
+            height={360}
+            drop={drop}
+            className="clock"
+            isPause={isUserIdle}
+          />
+        )
+      }}
+    </WaterWave>
+  )
+}
+
+const SmallWindow: React.FC<{
+  clientWidth: number
+}> = ({ clientWidth }) => {
+  const { isUserIdle } = useContext(LayoutContext)
+  const clockW = clientWidth > 576 ? 360 : 240
+  return (
+    <Clock
+      width={clockW}
+      height={clockW}
+      className="clock"
+      isPause={isUserIdle}
+    />
+  )
+}
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 80vh;
+  background-color: #2a2a2a;
+	/* background-image: url(${background}); */
+  /* background-image: linear-gradient(135deg, #fefefe 0%, #00a4e4 74%); */
   margin-bottom: 64px;
-  .image-wrapper {
-    /* max-width: 840px; */
+  .waterHolder {
     width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-    .image {
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-repeat: no-repeat;
-      background-position: initial;
-      background-size: cover;
-      &:after {
-        content: "";
-        background: #c3c3c370;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-    }
+    height: 100%;
   }
-  .image-ratio {
-    width: 100%;
-    padding-top: 50%;
-    /* padding-top: 75%; */
+  .clock {
+    top: 50%;
+    right: 20%;
+    transform: translate(14%, -50%);
   }
   * {
     font-family: "Architects Daughter", cursive;
   }
   .heading-wrapper {
+    /* width: 100%; */
     position: absolute;
     /* top: 50%; */
     /* right: 6%; */
-    top: 20%;
-    left: 58%;
-    transform: translate(-58%, -20%);
+    top: 50%;
+    left: 25%;
+    transform: translate(-25%, -50%);
     text-align: center;
     h1 {
       font-size: 80px;
+      line-height: 120px;
+      color: #fefefed9;
     }
   }
-  @media (max-width: 768px) {
-    .image-ratio {
-      padding-top: 100%;
+  @media (max-width: 992px) {
+    .clock {
+      right: 10%;
+      transform: translate(10%, -50%);
     }
-    .image-wrapper {
-      .image {
-        background-position: center center;
+    .heading-wrapper {
+      left: 20%;
+      transform: translate(-20%, -50%);
+      h1 {
+        font-size: 72px;
+        line-height: 88px;
+      }
+    }
+  }
+  @media (max-width: 800px) {
+    height: 70vh;
+    background-image: url(${background});
+		background-size: cover;
+    &::after {
+      ${image.grayLayer}
+    }
+    .clock {
+      top: 50px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+    .heading-wrapper {
+      top: 95%;
+      left: 50%;
+      transform: translate(-50%, -95%);
+			width: 100%;
+      h1 {
+        font-size: 72px;
+        line-height: 88px;
       }
     }
   }
   @media (max-width: 576px) {
+    height: 60vh;
+    .clock {
+      top: 24px;
+    }
     .heading-wrapper {
       h1 {
-        font-size: 60px;
+        font-size: 48px;
+        line-height: 56px;
+				margin: 0;
       }
     }
   }
   @media (max-width: 400px) {
-    .heading-wrapper {
-      h1 {
-        font-size: 48px;
-      }
-    }
   }
 `
 
 interface Props {}
 
-const HomeImage: React.FC<Props> = () => (
-  <Wrapper>
-    <div className="">
-      <div className="image-wrapper">
-        <div className="image-ratio">
-          <div
-            className="image"
-            style={{ backgroundImage: ` url(/images/rainbow_island.jpg)` }}
-          ></div>
-          <div className="heading-wrapper">
-            <h1 className="firstLine">Coding By</h1>
-            <h1 className="secondLine">
-              <span style={{ color: "#f98686e6" }}>C</span>
-              <span style={{ color: "#f3b157de" }}>O</span>
-              <span style={{ color: "#faead3" }}>L</span>
-              <span style={{ color: "#5fbf5fe8" }}>O</span>
-              <span style={{ color: "#7272f7e6" }}>R</span>
-              <span style={{ color: "#f97af9e6" }}>S</span>
-            </h1>
-          </div>
-        </div>
+const HomeImage: React.FC<Props> = () => {
+  const [clientWidth] = useWindowWidth()
+
+  return (
+    <Wrapper>
+      {clientWidth > 800 ? (
+        <LargeWindow />
+      ) : (
+        <SmallWindow clientWidth={clientWidth} />
+      )}
+      <div className="heading-wrapper">
+        <h1 className="firstLine">
+          Coding By
+          <br />
+          <span style={{ color: "#f98686e6" }}>C</span>
+          <span style={{ color: "#f3b157de" }}>O</span>
+          <span style={{ color: "#faead3" }}>L</span>
+          <span style={{ color: "#5fbf5fe8" }}>O</span>
+          <span style={{ color: "#7272f7e6" }}>R</span>
+          <span style={{ color: "#f97af9e6" }}>S</span>
+        </h1>
       </div>
-    </div>
-  </Wrapper>
-)
+    </Wrapper>
+  )
+}
 
 export default HomeImage

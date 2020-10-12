@@ -9,7 +9,7 @@ const Article = styled.article`
   width: 100%;
   max-width: 600px;
   overflow: hidden;
-  background: #fffaf4;
+  background: #fffdfa;
   border: 1px solid #d2d2d2a8;
   header {
     padding: 16px;

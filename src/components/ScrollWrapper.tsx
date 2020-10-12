@@ -6,9 +6,12 @@ interface Props {
 
 const ScrollWrapper: FC<Props> = ({ children }) => {
   const [isScrollDown, toggleScrollDown] = useState(true)
-  const [isLocked, toggleLocked] = useState(false)
-  const [lastY, saveLastY] = useState(0) // keep the lastest Y position
-  const [currentY, saveCurrentY] = useState(0) // keep the current Y position
+  let isLocked = false
+  let lastY = 0
+  let currentY = 0
+  // const [isLocked, toggleLocked] = useState(false)
+  // const [lastY, saveLastY] = useState(0) // keep the lastest Y position
+  // const [currentY, saveCurrentY] = useState(0) // keep the current Y position
 
   let lastCall = null
 
@@ -22,7 +25,8 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
     if (isLocked) {
       return
     }
-    toggleLocked(true)
+    isLocked = true
+    // toggleLocked(true)
 
     const wrapper: HTMLElement | null = wrapperElement.current
 
@@ -34,7 +38,8 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
       // get the current Y position
 
       // let currentY = Math.abs(wrapper.offsetTop - window.scrollY)
-      saveCurrentY(Math.abs(wrapper.offsetTop - window.scrollY))
+      // saveCurrentY(Math.abs(wrapper.offsetTop - window.scrollY))
+      currentY = Math.abs(wrapper.offsetTop - window.scrollY)
 
       if (handleScrollDown) {
         // "The current Y position > 0" && "The latest Y position < the current Y position
@@ -51,11 +56,13 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
         // if (currentY > 0 && lastY - currentY > 50) {
         //   toggleScrollDown(false)
         // }
-        saveLastY(currentY)
+        lastY = currentY
+        // saveLastY(currentY)
       }
     }, 150)
 
-    toggleLocked(false)
+    isLocked = false
+    // toggleLocked(false)
   }
 
   useEffect(() => {
@@ -64,7 +71,7 @@ const ScrollWrapper: FC<Props> = ({ children }) => {
     return () => {
       window.removeEventListener("scroll", scrolling)
     }
-  })
+  }, [])
 
   return (
     <div className="scroll-wrapper" ref={wrapperElement}>

@@ -1,4 +1,10 @@
-import React, { useState, FC, createContext, useReducer } from "react"
+import React, {
+  useState,
+  FC,
+  createContext,
+  useReducer,
+  useEffect,
+} from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -20,6 +26,7 @@ const Main = styled.main``
 
 const LayoutContext = createContext({
   browserWidth: 0,
+  isUserIdle: false,
 })
 
 interface Props {
@@ -34,8 +41,53 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ location, templateKey, post, children }) => {
-  // console.log("location", location)
-  const rootPath = `${__PATH_PREFIX__}/`
+  const [isIdle, setIdle] = useState(false)
+  let counter = 0
+  let localCounter = 0
+  let sharedCounter = 0
+
+  const timeoutPeriod = 1000 * 60 * 1 // 1 minutes
+
+  let lastCall = null
+
+  const checkIfUserIdle = function (): void {
+    if (isIdle) {
+      // doSomething if it's idle
+      counter = 0
+      localCounter = 0
+      sharedCounter = 0
+    }
+  }
+  const handleIdleTimedOut = function (): void {
+    sharedCounter = counter
+    if (localCounter === sharedCounter) {
+      setIdle(true)
+    }
+  }
+  const resetTimer = function (): void {
+    /**
+     * save counter in current window object,and after timeout period you can match it.
+     * If by chance multiple tabs were opened,the counter will be different,
+     * popup won't be shown in current window at incorrect time.
+     */
+    localCounter = counter
+    if (lastCall) {
+      clearTimeout(lastCall)
+    }
+    lastCall = setTimeout(handleIdleTimedOut, timeoutPeriod)
+  }
+  const resetUserIdle = function (): void {
+    // call this function whenever we detect user activity
+    setIdle(false)
+    resetTimer()
+  }
+  const increaseTimer = function (): void {
+    checkIfUserIdle()
+    counter++
+    resetTimer()
+  }
+
+  // const rootPath = `${__PATH_PREFIX__}/`
 
   let header
 
@@ -79,11 +131,24 @@ const Layout: FC<Props> = ({ location, templateKey, post, children }) => {
   //     </h3>
   //   )
   // }
+  useEffect(() => {
+    increaseTimer()
+    window.addEventListener("scroll", resetUserIdle)
+    window.addEventListener("mousemove", resetUserIdle)
+    window.addEventListener("focus", increaseTimer)
+    return () => {
+      window.removeEventListener("scroll", resetUserIdle)
+      window.removeEventListener("mousemove", resetUserIdle)
+      window.removeEventListener("focus", increaseTimer)
+    }
+  }, [])
 
   return (
     <Root className="root">
       <Head />
-      <LayoutContext.Provider value={{ browserWidth: getBrowserWidth() }}>
+      <LayoutContext.Provider
+        value={{ browserWidth: getBrowserWidth(), isUserIdle: isIdle }}
+      >
         <ScrollWrapper>
           {({ isScrollDown, currentY }) => (
             <>

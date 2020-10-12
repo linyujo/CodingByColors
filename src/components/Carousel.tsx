@@ -5,7 +5,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 
-import SquareImage from "./SquareImage"
+import WholeImage from "./WholeImage"
 import Icon from "./Icon"
 
 const CarouselW = styled.div`
@@ -14,6 +14,7 @@ const CarouselW = styled.div`
     width: 100%;
     padding-top: 100%;
     overflow: hidden;
+    background: #000000;
   }
   .c-item {
     position: absolute;
@@ -109,7 +110,7 @@ const Carousel: React.FC<Props> = ({ images }) => {
                 transform: `translateX(${(index - middle) * 100}%)`,
               }}
             >
-              <SquareImage image={url || ""} />
+              <WholeImage image={url || ""} />
             </li>
           )
         })}

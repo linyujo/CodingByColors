@@ -13,7 +13,7 @@ templateKey: blog-post
 ---
 初學 React 時，只會用一種方式嵌套多個 Component：從最大的 Component，包住較小的 Component，像是 N 層俄羅斯娃娃一般。
 
-```html
+```jsx
 <App>
 	<Header />
   <Body>
@@ -83,7 +83,7 @@ Kent C. Dodds 在前端教學網站 egghead 提供了幾個 react 設計模式�
 
 React.Children.map 的缺點是，它是用 for 迴圈的方式，將父容器的資料以 props 傳給**第一層**的子元件。只要其中一個子元件被一層`<div>`包住，資料將會注入第一層的`<div>`，而非該元件。範例如下：
 
-```
+```jsx
 return (
   <CustomSelect // 父容器
     label="Manager"

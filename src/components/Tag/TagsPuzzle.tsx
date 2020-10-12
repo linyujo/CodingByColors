@@ -92,16 +92,24 @@ const GridAnchor = styled.div`
       }
     }
     &.background_0 {
-      background: rgba(224, 205, 207, 1);
+      /* background: rgba(224, 205, 207, 1); */
+      background: url("/images/vintage_concrete.png");
+      background-repeat: repeat;
     }
     &.background_1 {
-      background: rgba(211, 205, 213, 1);
+      /* background: rgba(211, 205, 213, 1); */
+      background: url("/images/ep_naturalwhite.png");
+      background-repeat: repeat;
     }
     &.background_2 {
-      background: rgba(234, 221, 222, 1);
+      /* background: rgba(234, 221, 222, 1); */
+      background: url("/images/ricepaper_v3.png");
+      background-repeat: repeat;
     }
     &.background_3 {
-      background: rgba(226, 205, 215, 1);
+      /* background: rgba(226, 205, 215, 1); */
+      background: url("/images/paper_1.png");
+      background-repeat: repeat;
     }
   }
   .info {

@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   margin: 0 -2px;
   background: #f6f2f1;
   height: 64px;
+  overflow: hidden;
   @media (max-width: 768px) {
     height: 54px;
   }
@@ -58,7 +59,9 @@ const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition, pathname }) => {
     // 小螢幕有出現popupNav
     showCondition = true
   }
-  if (!isScrollDown && scrollPosition > 800) {
+  console.log("isScrollDown", isScrollDown)
+  console.log("scrollPosition", scrollPosition)
+  if (!isScrollDown && scrollPosition > 900) {
     // 向上滑 && 滑行距離 > 100
     showCondition = true
   }

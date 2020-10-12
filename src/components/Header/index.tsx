@@ -14,6 +14,7 @@ const Wrapper = styled.header`
   margin: 0 -2px;
   background: #f6f2f1;
   height: 64px;
+  overflow: hidden;
   @media (max-width: 768px) {
     height: 54px;
   }

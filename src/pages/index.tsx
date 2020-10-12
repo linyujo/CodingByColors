@@ -13,9 +13,6 @@ import { rhythm } from "../utils/typography"
 
 const Home = styled.div`
   padding: 0 0 64px 0;
-  @media (max-width: 768px) {
-    padding: 48px 0;
-  }
   .custom-row {
     margin-right: 0;
     margin-left: 0;
@@ -34,7 +31,7 @@ interface Props {
 const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
   // const siteTitle = data.site.siteMetadata.title
 
-  console.log("data", data)
+  // console.log("data", data)
 
   const posts = data.allMarkdownRemark.edges
 
