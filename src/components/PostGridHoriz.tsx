@@ -62,6 +62,7 @@ const PostGridW = styled.div`
       background: none;
       .info-inner {
         padding-top: 0;
+        height: auto;
         .info-content {
           position: relative;
           padding: 40px;
@@ -108,7 +109,11 @@ const PostGridHoriz: React.FC<Props> = ({ post, url, index }) => {
             <p className="description">{description}</p>
             <div className="tags">
               {tags.map(name => (
-                <Tag name={name} key={name} />
+                <Tag
+                  name={name}
+                  link={`/tags/${name.toLowerCase().replace(/\s/g, "")}`}
+                  key={name}
+                />
               ))}
             </div>
           </div>

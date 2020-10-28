@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useContext } from "react"
 import styled from "styled-components"
 
 import FadeInOut from "../FadeInOut"
@@ -7,12 +7,17 @@ import { LogoLink } from "./LeftGroup"
 import RightGroup from "./RightGroup"
 import { Nav } from "./MiddleGroup"
 
+import scrollContext from "../../contexts/scrollContext"
+
 const Wrapper = styled.div`
   box-shadow: 0 3px 0px -2px #cece4fb8;
   margin: 0 -2px;
   background: #f6f2f1;
   height: 64px;
   overflow: hidden;
+  .container {
+    height: 100%;
+  }
   @media (max-width: 768px) {
     height: 54px;
   }
@@ -37,9 +42,6 @@ const headerDefaultStyles = {
 }
 
 interface Props {
-  isScrollDown: Boolean
-  scrollPosition: number
-  pathname: string
   templateKey: string
   post?: {
     title: string
@@ -48,8 +50,9 @@ interface Props {
   }
 }
 
-const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition, pathname }) => {
+const FloatHeader: FC<Props> = () => {
   const [isHidePopupNav, togglePopupNav] = useState(true)
+  const { isScrollDown, scrollTop } = useContext(scrollContext)
   const handlePopupMenu = () => {
     togglePopupNav(!isHidePopupNav)
   }
@@ -59,9 +62,7 @@ const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition, pathname }) => {
     // 小螢幕有出現popupNav
     showCondition = true
   }
-  console.log("isScrollDown", isScrollDown)
-  console.log("scrollPosition", scrollPosition)
-  if (!isScrollDown && scrollPosition > 900) {
+  if (!isScrollDown && scrollTop > 900) {
     // 向上滑 && 滑行距離 > 100
     showCondition = true
   }
@@ -72,18 +73,18 @@ const FloatHeader: FC<Props> = ({ isScrollDown, scrollPosition, pathname }) => {
       transitionStyles={headerTransitionStyles}
       defaultStyles={headerDefaultStyles}
     >
-      <div className="container">
-        <Wrapper>
+      <Wrapper>
+        <div className="container">
           <SpaceBetween>
             <LogoLink />
-            <Nav pathname={pathname} />
+            <Nav />
             <RightGroup
               isHidePopupNav={isHidePopupNav}
               togglePopupNav={handlePopupMenu}
             />
           </SpaceBetween>
-        </Wrapper>
-      </div>
+        </div>
+      </Wrapper>
     </FadeInOut>
   )
 }

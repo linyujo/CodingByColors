@@ -43,7 +43,11 @@ const MobileTagList: React.FC<Props> = ({ tags, tagsMapping }) => {
           )
           .map(tagName => (
             <div className="aTag" key={tagName}>
-              <Tag name={`${tagName}`} />
+              <Tag
+                name={`${tagName}`}
+                link={`/tags/${tagName.toLowerCase().replace(/\s/g, "")}`}
+                key={tagName}
+              />
             </div>
           ))}
       </div>

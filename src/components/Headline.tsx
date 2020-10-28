@@ -6,6 +6,7 @@ import Tag from "./Tag/Tag"
 import { image, postGridInfo } from "../styles/common-css"
 
 const Wrapper = styled.div`
+  width: 100%;
   margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
@@ -110,7 +111,11 @@ const Headerline: React.FC<Props> = memo(({ post, url }) => {
         <p className="description">{post.description}</p>
         <div className="tags">
           {post.tags.map(name => (
-            <Tag name={name} key={name} />
+            <Tag
+              name={name}
+              link={`/tags/${name.toLowerCase().replace(/\s/g, "")}`}
+              key={name}
+            />
           ))}
         </div>
       </Info>

@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "gatsby"
 import styled, { css } from "styled-components"
 
+import config from "../../../config.json"
+
 const puzzlePieceTop = css`
   content: "";
   background: inherit;
@@ -93,22 +95,22 @@ const GridAnchor = styled.div`
     }
     &.background_0 {
       /* background: rgba(224, 205, 207, 1); */
-      background: url("/images/vintage_concrete.png");
+      background: url(${config.images.paperBg.vintageConcrete});
       background-repeat: repeat;
     }
     &.background_1 {
       /* background: rgba(211, 205, 213, 1); */
-      background: url("/images/ep_naturalwhite.png");
+      background: url(${config.images.paperBg.epNaturalWhite});
       background-repeat: repeat;
     }
     &.background_2 {
       /* background: rgba(234, 221, 222, 1); */
-      background: url("/images/ricepaper_v3.png");
+      background: url(${config.images.paperBg.ricepaperV3});
       background-repeat: repeat;
     }
     &.background_3 {
       /* background: rgba(226, 205, 215, 1); */
-      background: url("/images/paper_1.png");
+      background: url(${config.images.paperBg.paper_1});
       background-repeat: repeat;
     }
   }
@@ -187,6 +189,7 @@ interface Props {
 const TagsPuzzle: React.FC<Props> = ({ index, name, count, image }) => {
   const isReverse = index % 3 !== 1 ? "" : "reverse"
   const backgroundIndex = `background_${index % 4}`
+
   return (
     <GridAnchor>
       <Link

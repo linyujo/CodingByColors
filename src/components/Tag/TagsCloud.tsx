@@ -13,22 +13,69 @@ const TagsCloudW = styled.div`
   .tag-link {
     display: block;
     margin-bottom: 8px;
+    cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
   }
 `
 
-interface Props {
-  tags: string[]
+interface TagItemProps {
+  name: string
   tagsMapping: {}
-  title: string
+  tagFontSize: Function
 }
 
-const TagsCloud: React.FC<Props> = ({ tags, tagsMapping, title }) => {
+const TagLink: React.FC<TagItemProps> = ({
+  name,
+  tagsMapping,
+  tagFontSize,
+}) => (
+  <Link
+    to={`/tags/${name.toLowerCase().replace(/\s/g, "")}`}
+    style={{
+      fontSize: tagFontSize(tagsMapping[name].count || tagsMapping[name]),
+      color: randomColor(),
+    }}
+    className="tag-link"
+  >
+    {name}
+  </Link>
+)
+
+const TagSpan: React.FC<
+  TagItemProps & {
+    setFilter: Function
+  }
+> = ({ name, tagsMapping, tagFontSize, setFilter }) => {
+  const handleClick = (): void => {
+    setFilter(name)
+  }
+  return (
+    <span
+      style={{
+        fontSize: tagFontSize(tagsMapping[name].count || tagsMapping[name]),
+        color: randomColor(),
+      }}
+      className="tag-link"
+      key={name}
+      onClick={handleClick}
+    >
+      {name}
+    </span>
+  )
+}
+
+interface Props {
+  title: string
+  tags: string[]
+  tagsMapping: {}
+  children: any
+}
+
+const TagsCloud: React.FC<Props> = ({ title, tags, tagsMapping, children }) => {
   const biggestTag = tags[0]
   const maxCount = tagsMapping[biggestTag].count || tagsMapping[biggestTag]
-
   const tagFontSize = function (count: number): number {
     const min = 14
     const max = 24
@@ -43,28 +90,13 @@ const TagsCloud: React.FC<Props> = ({ tags, tagsMapping, title }) => {
         </TagStyle>
       </div>
       <div className="tags">
-        {tags
-          .sort((strA, strB) =>
-            strA.toLowerCase().localeCompare(strB.toLowerCase())
-          )
-          .map(tagName => (
-            <Link
-              to={`/tags/${tagName.toLowerCase().replace(/\s/g, "")}`}
-              style={{
-                fontSize: tagFontSize(
-                  tagsMapping[tagName].count || tagsMapping[tagName]
-                ),
-                color: randomColor(),
-              }}
-              className="tag-link"
-              key={tagName}
-            >
-              {tagName}
-            </Link>
-          ))}
+        {children({
+          tagFontSize: tagFontSize,
+          tagsMapping: tagsMapping,
+        })}
       </div>
     </TagsCloudW>
   )
 }
 
-export default TagsCloud
+export { TagsCloud, TagLink, TagSpan }

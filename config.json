@@ -1,7 +1,20 @@
 {
   "urlBackground": {
+    "home": {
+      "day": "/images/rain_day.jpg",
+      "night": "/images/rain_night.jpg"
+    },
     "/tags": "/images/library.jpg",
     "/tweets": "/images/diary.jpg",
     "default": "/images/default.jpg"
+  },
+  "images": {
+    "clock": "/images/clock.png",
+    "paperBg": {
+      "vintageConcrete": "/images/vintage_concrete.png",
+      "epNaturalWhite": "/images/ep_naturalwhite.png",
+      "ricepaperV3": "/images/ricepaper_v3.png",
+      "paper_1": "/images/paper_1.png"
+    }
   }
 }

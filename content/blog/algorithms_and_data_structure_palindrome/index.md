@@ -5,10 +5,9 @@ subject: 資料結構與演算法
 title: 迴文
 date: 2020-01-08T1:00:00Z
 tags:
-  - Apple
-  - Banana 
-description: 如果你也常因為過度完美主義、太在意他人眼光等原因而感到焦慮不安，那不妨參考看看 5 個心態調整的方法，這些是我自己也還在不斷練習的，讓我們一起與焦慮共處、更溫柔平衡的面對人生！
-headerImage: "https://imgur.com/u5w2NKh.jpg"
+  - Algorithms and Data Structures
+description: 請完成一個 function：參數為 string，請判斷該字串正著看和反著看，可否是相同的單詞？是的話請回傳 true, 否則回傳 false
+headerImage: "https://imgur.com/NumU4Eo.jpg"
 templateKey: blog-post
 ---
 

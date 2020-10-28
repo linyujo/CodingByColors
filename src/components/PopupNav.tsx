@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useContext } from "react"
 import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled from "styled-components"
@@ -7,25 +7,36 @@ import FadeInOut from "./FadeInOut"
 import Icon from "./Icon"
 import Avatar from "./Avatar"
 
+import LayoutContext from "../contexts/layoutContext"
+
 const Wrapper = styled.nav`
   width: 50vw;
   height: 100vh;
   background: #f6f2f1;
   ul {
     padding-top: 68px;
-    padding-left: 64px;
     text-align: left;
-    li {
-      padding: 20px 10px;
+  }
+  li {
+    padding: 20px 10px;
+    transition: all 0.2s;
+    a {
+      display: block;
+      margin-left: 44px;
+    }
+    &.active {
+      background: #fefefe;
       a {
-        display: block;
+        color: #d2b100;
       }
     }
   }
   @media (max-width: 500px) {
     width: 60vw;
-    ul {
-      padding-left: 24px;
+    li {
+      a {
+        margin-left: 20px;
+      }
     }
   }
 `
@@ -49,10 +60,11 @@ const popupNavDefaultStyles = {
 }
 
 interface Props {
-  isHide: Boolean
+  isHide: boolean
 }
 
 const PopupNav: FC<Props> = ({ isHide }) => {
+  const { location } = useContext(LayoutContext)
   return (
     <FadeInOut
       toggle={isHide}
@@ -61,7 +73,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
     >
       <Wrapper>
         <ul>
-          <li>
+          <li className={location.pathname.includes("/tweets") ? "active" : ""}>
             <Link
               to="/tweets"
               onClick={() => {
@@ -74,7 +86,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
               Working Tweets
             </Link>
           </li>
-          <li>
+          <li className={location.pathname.includes("/tags") ? "active" : ""}>
             <Link
               to="/tags"
               onClick={() => {

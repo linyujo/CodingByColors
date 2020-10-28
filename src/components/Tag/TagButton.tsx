@@ -1,19 +1,19 @@
 import React from "react"
 import styled from "styled-components"
 
-const Anchor = styled.a`
+const Button = styled.button`
   line-height: 20px;
   font-size: 14px;
   letter-spacing: 1px;
-  color: #fdf9ee;
-  background: #e0cdcf;
+  color: #ffffff;
+  background: #c1cbd7;
   border-radius: 4px;
   margin-right: 4px;
   margin-bottom: 4px;
   padding: 2px 8px;
   transition: all 0.2s;
   &:hover {
-    color: #afb0b2;
+    color: #484848;
   }
   @media (max-width: 576px) {
     letter-spacing: 0;
@@ -22,13 +22,14 @@ const Anchor = styled.a`
 
 interface Props {
   name: string
-  link: string
+  handleClick: Function
 }
 
-// `/tags/${name.toLowerCase().replace(/\s/g, "")}`
+const TagButton: React.FC<Props> = ({ name, handleClick }) => {
+  const clickHandler = (): void => {
+    handleClick(name)
+  }
+  return <Button onClick={clickHandler}>#{name}</Button>
+}
 
-const Tag: React.FC<Props> = ({ name, link }) => (
-  <Anchor href={link}>#{name}</Anchor>
-)
-
-export default Tag
+export default TagButton

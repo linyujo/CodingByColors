@@ -5,7 +5,7 @@ import styled from "styled-components"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 import PageTitle from "../components/PageTitle"
-import TagsCloud from "../components/Tag/TagsCloud"
+import { TagsCloud, TagLink } from "../components/Tag/TagsCloud"
 import PostGridHoriz from "../components/PostGridHoriz"
 
 import { pageWrapper, mainWrapper } from "../styles/common-css"
@@ -96,10 +96,20 @@ const TagGroupTemplate: React.FC<PageProps<Props>> = ({
           </section>
           <aside className="tags-cloud">
             <TagsCloud
+              title="Article Tags"
               tags={tags}
               tagsMapping={tagsMapping}
-              title="Article Tags"
-            />
+            >
+              {tagProps =>
+                tags
+                  .sort((strA, strB) =>
+                    strA.toLowerCase().localeCompare(strB.toLowerCase())
+                  )
+                  .map(tagName => (
+                    <TagLink {...tagProps} name={tagName} key={tagName} />
+                  ))
+              }
+            </TagsCloud>
           </aside>
         </main>
       </TagGroupW>
@@ -112,8 +122,11 @@ export default TagGroupTemplate
 export const pageQuery = graphql`
   query tagQuery($tag: [String!]) {
     relevantPosts: allMarkdownRemark(
+      filter: {
+        fileAbsolutePath: { regex: "/blog/" }
+        frontmatter: { tags: { in: $tag } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: $tag } } }
     ) {
       edges {
         node {
@@ -133,7 +146,9 @@ export const pageQuery = graphql`
       }
     }
 
-    allPosts: allMarkdownRemark {
+    allPosts: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+    ) {
       edges {
         node {
           frontmatter {

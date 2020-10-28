@@ -178,7 +178,11 @@ const PostGrid: React.FC<Props> = ({ post, url, index }) => {
             <p className="description">{post.description}</p>
             <div className="tags">
               {post.tags.map(name => (
-                <Tag name={name} key={name} />
+                <Tag
+                  name={name}
+                  link={`/tags/${name.toLowerCase().replace(/\s/g, "")}`}
+                  key={name}
+                />
               ))}
             </div>
           </div>

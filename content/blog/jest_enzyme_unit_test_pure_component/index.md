@@ -9,7 +9,7 @@ tags:
   - React 
   - Jest 
   - Enzyme 
-headerImage: "https://imgur.com/Q0sxl2k.jpg"
+headerImage: "https://imgur.com/YRatSdu.jpg"
 templateKey: blog-post
 ---
 

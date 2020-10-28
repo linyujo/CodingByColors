@@ -5,11 +5,11 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import PageTitle from "../components/PageTitle"
-import TagsCloud from "../components/Tag/TagsCloud"
+import { TagsCloud, TagLink } from "../components/Tag/TagsCloud"
 import MobileTagList from "../components/Tag/MobileTagList"
 import TagsPuzzle from "../components/Tag/TagsPuzzle"
 
-import { getBrowserWidth } from "../utils/browserUtils"
+import useWindowWidth from "../hooks/useWindowWidth"
 import { getTagsOfPosts } from "../utils/markdownTagsMapping"
 
 import {
@@ -83,11 +83,17 @@ const DesktopContent: React.FC<DesktopProps> = ({
           </div>
         </section>
         <aside className="tags-cloud">
-          <TagsCloud
-            tags={tags}
-            tagsMapping={tagsMapping}
-            title="Article Tags"
-          />
+          <TagsCloud title="Article Tags" tags={tags} tagsMapping={tagsMapping}>
+            {tagProps =>
+              tags
+                .sort((strA, strB) =>
+                  strA.toLowerCase().localeCompare(strB.toLowerCase())
+                )
+                .map(tagName => (
+                  <TagLink {...tagProps} name={tagName} key={tagName} />
+                ))
+            }
+          </TagsCloud>
         </aside>
       </main>
     </DesktopContentW>
@@ -103,15 +109,15 @@ interface Props {
 }
 
 const TagsPage: React.FC<PageProps<Props>> = ({ data, location }) => {
+  const clientWidth = useWindowWidth()
+
   const { allMarkdownRemark } = data
 
   const { tags, tagsMapping } = getTagsOfPosts(allMarkdownRemark.edges)
 
-  const browserWidth = getBrowserWidth()
-
   let component
 
-  if (browserWidth > 576) {
+  if (clientWidth > 576) {
     component = (
       <DesktopContent
         tags={tags}
@@ -126,7 +132,7 @@ const TagsPage: React.FC<PageProps<Props>> = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="tags" />
-      <Wrapper>{component}</Wrapper>
+      <Wrapper>{clientWidth && component}</Wrapper>
     </Layout>
   )
 }
@@ -135,7 +141,7 @@ export default TagsPage
 
 export const pageQuery = graphql`
   query getAllTags {
-    allMarkdownRemark {
+    allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/blog/" } }) {
       edges {
         node {
           frontmatter {

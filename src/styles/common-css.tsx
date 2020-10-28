@@ -190,6 +190,19 @@ const markdownHtml = css`
   }
 `
 
+const triangleShape = {
+  left: css`
+    position: absolute;
+    top: 0;
+    right: -14px;
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-right: 14px solid white;
+  `,
+}
+
 export {
   vrt_horiz_center,
   pageWrapper,
@@ -199,4 +212,5 @@ export {
   image,
   postGridInfo,
   markdownHtml,
+  triangleShape,
 }

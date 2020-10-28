@@ -37,7 +37,7 @@ const Left = styled.span`
 `
 
 interface ArrowLeftProps {
-  isHover?: Boolean
+  isHover?: boolean
 }
 const ArrowLeft: React.FC<ArrowLeftProps> = ({ isHover }) => {
   const isActive = isHover ? "active" : ""

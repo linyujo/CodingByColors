@@ -1,4 +1,4 @@
-import React, { FC, useState, memo } from "react"
+import React, { FC, useState, memo, useContext } from "react"
 import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled, { css } from "styled-components"
@@ -20,12 +20,9 @@ const Wrapper = styled.header`
   }
 `
 
-interface DefaultHeaderProps {
-  pathname: string
-}
-
-const DefaultHeader: FC<DefaultHeaderProps> = ({ pathname }) => {
+const DefaultHeader: FC<{}> = () => {
   const [isHidePopupNav, togglePopupNav] = useState(true)
+
   const handlePopupMenu = () => {
     togglePopupNav(!isHidePopupNav)
   }
@@ -35,7 +32,7 @@ const DefaultHeader: FC<DefaultHeaderProps> = ({ pathname }) => {
       <Wrapper>
         <SpaceBetween>
           <LogoLink />
-          <Nav pathname={pathname} />
+          <Nav />
           <RightGroup
             isHidePopupNav={isHidePopupNav}
             togglePopupNav={handlePopupMenu}
@@ -47,7 +44,6 @@ const DefaultHeader: FC<DefaultHeaderProps> = ({ pathname }) => {
 }
 
 interface HeaderProps {
-  pathname: string
   templateKey: string
   post?: {
     title: string
@@ -64,10 +60,10 @@ const preventUpdateMemo = (prevProps, nextProps) => {
   return false
 }
 
-const Header: FC<HeaderProps> = memo(({ pathname, templateKey, post }) => {
+const Header: FC<HeaderProps> = memo(({ templateKey, post }) => {
   let header
   if (templateKey !== "blog-post") {
-    header = <DefaultHeader pathname={pathname} />
+    header = <DefaultHeader />
   } else {
     header = <BlogPostHeader post={post} />
   }

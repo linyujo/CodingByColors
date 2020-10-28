@@ -8,7 +8,7 @@ description: 工作上收到設計稿時，我習慣先和組員討論，哪些�
 tags:
   - React Component Patterns
   - React
-headerImage: "https://imgur.com/TYdA1P9.jpg"
+headerImage: "https://imgur.com/vOpiMtK.jpg"
 templateKey: blog-post
 ---
 初學 React 時，只會用一種方式嵌套多個 Component：從最大的 Component，包住較小的 Component，像是 N 層俄羅斯娃娃一般。

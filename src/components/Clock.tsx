@@ -5,6 +5,8 @@ import { getRandomInt } from "../utils/numberUtils"
 import { getBrowserWidth } from "../utils/browserUtils"
 import { vrt_horiz_center } from "../styles/common-css"
 
+import { images } from "../../config.json"
+
 const pointerTransition = css`
   transition: 0.3s ease background;
 `
@@ -26,7 +28,7 @@ const rotateAreaStyle = css`
 `
 
 const ClockW = styled.div`
-  background: url(/images/clock.png);
+  background: url(${images.clock});
   background-position: center;
   background-size: cover;
   border-radius: 50%;
@@ -113,7 +115,7 @@ interface Props {
   height: number
   className: string
   drop?: Function
-  isPause: Boolean
+  isPause: boolean
 }
 
 const Clock: React.FC<Props> = ({
@@ -138,6 +140,7 @@ const Clock: React.FC<Props> = ({
     let hours = day.getHours()
     let minutes = day.getMinutes()
     let seconds = day.getSeconds()
+    const dropInterval = 3000
 
     function updateTime() {
       const deg = 6
@@ -166,7 +169,14 @@ const Clock: React.FC<Props> = ({
         clockElement.current.getBoundingClientRect().left
       )
       const YTop = Math.round(clockElement.current.getBoundingClientRect().top)
-      updateDrop = setInterval(animateWaterDrop, 2000, Xleft, YTop, width, drop)
+      updateDrop = setInterval(
+        animateWaterDrop,
+        dropInterval,
+        Xleft,
+        YTop,
+        width,
+        drop
+      )
     }
 
     // returned function will be called on component unmount

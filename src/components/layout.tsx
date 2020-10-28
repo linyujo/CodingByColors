@@ -1,11 +1,5 @@
-import React, {
-  useState,
-  FC,
-  createContext,
-  useReducer,
-  useEffect,
-} from "react"
-import { Link } from "gatsby"
+import React, { FC } from "react"
+// import { Link } from "gatsby"
 import styled from "styled-components"
 
 import Head from "./Head"
@@ -13,8 +7,11 @@ import Header from "../components/Header"
 import FloatHeader from "./Header/FloatHeader"
 import ScrollWrapper from "./ScrollWrapper"
 
-import { rhythm, scale } from "../utils/typography"
-import { getBrowserWidth } from "../utils/browserUtils"
+import LayoutContext from "../contexts/layoutContext"
+import useUserState from "../hooks/useUserState"
+import useWindowWidth from "../hooks/useWindowWidth"
+
+// import { rhythm, scale } from "../utils/typography"
 
 import "../styles/_basic.scss"
 
@@ -23,11 +20,6 @@ const Root = styled.div`
 `
 
 const Main = styled.main``
-
-const LayoutContext = createContext({
-  browserWidth: 0,
-  isUserIdle: false,
-})
 
 interface Props {
   location: Location
@@ -41,51 +33,8 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ location, templateKey, post, children }) => {
-  const [isIdle, setIdle] = useState(false)
-  let counter = 0
-  let localCounter = 0
-  let sharedCounter = 0
-
-  const timeoutPeriod = 1000 * 60 * 1 // 1 minutes
-
-  let lastCall = null
-
-  const checkIfUserIdle = function (): void {
-    if (isIdle) {
-      // doSomething if it's idle
-      counter = 0
-      localCounter = 0
-      sharedCounter = 0
-    }
-  }
-  const handleIdleTimedOut = function (): void {
-    sharedCounter = counter
-    if (localCounter === sharedCounter) {
-      setIdle(true)
-    }
-  }
-  const resetTimer = function (): void {
-    /**
-     * save counter in current window object,and after timeout period you can match it.
-     * If by chance multiple tabs were opened,the counter will be different,
-     * popup won't be shown in current window at incorrect time.
-     */
-    localCounter = counter
-    if (lastCall) {
-      clearTimeout(lastCall)
-    }
-    lastCall = setTimeout(handleIdleTimedOut, timeoutPeriod)
-  }
-  const resetUserIdle = function (): void {
-    // call this function whenever we detect user activity
-    setIdle(false)
-    resetTimer()
-  }
-  const increaseTimer = function (): void {
-    checkIfUserIdle()
-    counter++
-    resetTimer()
-  }
+  const { isIdle } = useUserState()
+  const windowWidth = useWindowWidth()
 
   // const rootPath = `${__PATH_PREFIX__}/`
 
@@ -131,42 +80,21 @@ const Layout: FC<Props> = ({ location, templateKey, post, children }) => {
   //     </h3>
   //   )
   // }
-  useEffect(() => {
-    increaseTimer()
-    window.addEventListener("scroll", resetUserIdle)
-    window.addEventListener("mousemove", resetUserIdle)
-    window.addEventListener("focus", increaseTimer)
-    return () => {
-      window.removeEventListener("scroll", resetUserIdle)
-      window.removeEventListener("mousemove", resetUserIdle)
-      window.removeEventListener("focus", increaseTimer)
-    }
-  }, [])
 
   return (
     <Root className="root">
       <Head />
       <LayoutContext.Provider
-        value={{ browserWidth: getBrowserWidth(), isUserIdle: isIdle }}
+        value={{
+          browserWidth: windowWidth,
+          isUserIdle: isIdle,
+          location: location,
+        }}
       >
         <ScrollWrapper>
-          {({ isScrollDown, currentY }) => (
-            <>
-              <Header
-                pathname={location.pathname}
-                templateKey={templateKey}
-                post={post}
-              />
-              <FloatHeader
-                isScrollDown={isScrollDown}
-                scrollPosition={currentY}
-                pathname={location.pathname}
-                templateKey={templateKey}
-                post={post}
-              />
-              <Main>{children}</Main>
-            </>
-          )}
+          <Header templateKey={templateKey} post={post} />
+          <FloatHeader templateKey={templateKey} post={post} />
+          <Main>{children}</Main>
         </ScrollWrapper>
       </LayoutContext.Provider>
     </Root>

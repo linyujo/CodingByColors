@@ -8,7 +8,7 @@ import Avatar from "../Avatar"
 import HamburgerButton from "../HamburgerButton"
 import PopupNav from "../PopupNav"
 
-import { LayoutContext } from "../layout"
+import LayoutContext from "../../contexts/layoutContext"
 
 /**
  * Icons
@@ -60,7 +60,7 @@ const HamburgerWrapper = styled.div`
 
 interface HamburgerProps {
   togglePopupNav: Function
-  isHidePopupNav: Boolean
+  isHidePopupNav: boolean
 }
 
 const Hamburger: React.FC<HamburgerProps> = ({
@@ -79,7 +79,7 @@ const Hamburger: React.FC<HamburgerProps> = ({
 
 interface Props {
   togglePopupNav: Function
-  isHidePopupNav: Boolean
+  isHidePopupNav: boolean
 }
 
 const preventUpdateMemo = (prevProps, nextProps) => {

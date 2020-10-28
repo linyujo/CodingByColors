@@ -4,15 +4,32 @@ import WaterWave from "react-water-wave"
 
 import Clock from "./Clock"
 
-import { useWindowWidth } from "../hooks/windowHooks"
-import { getBrowserWidth } from "../utils/browserUtils"
-import { LayoutContext } from "../components/layout"
+import useWindowWidth from "../hooks/useWindowWidth"
+import LayoutContext from "../contexts/layoutContext"
 import { image } from "../styles/common-css"
+import config from "../../config.json"
 
-const background: string = require("../../static/images/rain.jpg")
+const background_day: string = config.urlBackground.home.day
+const background_night: string = config.urlBackground.home.night
+
+const getDayNightShift = function (): string {
+  let dayOrNight: string
+
+  const currentdate = new Date()
+  const hours = currentdate.getHours()
+  if (hours >= 6 && hours <= 16) {
+    // day
+    dayOrNight = "DAY"
+  } else {
+    dayOrNight = "NIGHT"
+  }
+
+  return dayOrNight
+}
 
 const LargeWindow: React.FC<{}> = () => {
   const { isUserIdle } = useContext(LayoutContext)
+  const dayOrNight = getDayNightShift()
   return (
     <WaterWave
       style={{
@@ -20,9 +37,11 @@ const LargeWindow: React.FC<{}> = () => {
         height: "100%",
         backgroundSize: "cover",
       }}
-      imageUrl={background}
+      imageUrl={dayOrNight === "DAY" ? background_day : background_night}
+      perturbance={0.01}
     >
-      {({ drop }) => {
+      {({ drop, pause, play }) => {
+        isUserIdle ? pause() : play()
         return (
           <Clock
             width={360}
@@ -56,7 +75,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 80vh;
   background-color: #2a2a2a;
-	/* background-image: url(${background}); */
   /* background-image: linear-gradient(135deg, #fefefe 0%, #00a4e4 74%); */
   margin-bottom: 64px;
   .waterHolder {
@@ -102,8 +120,11 @@ const Wrapper = styled.div`
   }
   @media (max-width: 800px) {
     height: 70vh;
-    background-image: url(${background});
-		background-size: cover;
+    background-image: ${props =>
+      props.dayOrNight === "DAY"
+        ? `url(${background_day})`
+        : `url(${background_night})`};
+    background-size: cover;
     &::after {
       ${image.grayLayer}
     }
@@ -116,7 +137,7 @@ const Wrapper = styled.div`
       top: 95%;
       left: 50%;
       transform: translate(-50%, -95%);
-			width: 100%;
+      width: 100%;
       h1 {
         font-size: 72px;
         line-height: 88px;
@@ -132,7 +153,7 @@ const Wrapper = styled.div`
       h1 {
         font-size: 48px;
         line-height: 56px;
-				margin: 0;
+        margin: 0;
       }
     }
   }
@@ -143,10 +164,11 @@ const Wrapper = styled.div`
 interface Props {}
 
 const HomeImage: React.FC<Props> = () => {
-  const [clientWidth] = useWindowWidth()
+  const clientWidth = useWindowWidth()
+  const dayOrNight = getDayNightShift()
 
   return (
-    <Wrapper>
+    <Wrapper dayOrNight={dayOrNight}>
       {clientWidth > 800 ? (
         <LargeWindow />
       ) : (

@@ -64,16 +64,16 @@ const PostHeader = styled.header`
     bottom: 1px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center 50%;
-    /* &:after {
+    background-position: bottom;
+    &:after {
       content: "";
-      background: #fdffff24;
+      background: #75757557;
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-    } */
+    }
   }
   @media (max-width: 1024px) {
     height: 500px;
@@ -97,6 +97,7 @@ interface Props {
     subject: string
     date: string
     tags: Array<string>
+    headerImage: string
   }
 }
 
@@ -113,7 +114,7 @@ const BlogPostHeader: React.FC<Props> = React.memo(
         <div className="content-wrapper">
           <div
             className="header-bg"
-            style={{ backgroundImage: `url(${randomBackgroundURL})` }}
+            style={{ backgroundImage: `url(${post.headerImage})` }}
           ></div>
           <div className="header-content">
             <h1>
@@ -122,7 +123,11 @@ const BlogPostHeader: React.FC<Props> = React.memo(
             <p className="date">{post.date}</p>
             <div className="tags">
               {post.tags.map(name => (
-                <Tag name={name} key={name} />
+                <Tag
+                  name={name}
+                  link={`/tags/${name.toLowerCase().replace(/\s/g, "")}`}
+                  key={name}
+                />
               ))}
             </div>
           </div>

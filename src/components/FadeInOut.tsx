@@ -2,7 +2,7 @@ import React from "react"
 import { Transition } from "react-transition-group"
 
 interface Props {
-  toggle: Boolean
+  toggle: boolean
   transitionStyles: {
     entering: {
       transform: string

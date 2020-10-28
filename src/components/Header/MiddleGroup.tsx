@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import ReactGA from "react-ga"
 import styled from "styled-components"
 
+import LayoutContext from "../../contexts/layoutContext"
+
 /**
  * Nav
  */
@@ -20,12 +22,12 @@ const NavWrapper = styled.nav`
     color: #656565;
     transition: all 0.2s;
     &:hover {
-      transform: scale(1.04);
-      color: #484848;
+      /* transform: scale(1.04); */
+      color: #d2b100;
     }
     &.active {
-      transform: scale(1.04);
-      color: #484848;
+      /* transform: scale(1.04); */
+      color: #d2b100;
       background: #fefefe;
     }
   }
@@ -34,10 +36,6 @@ const NavWrapper = styled.nav`
   }
 `
 
-interface NavProps {
-  pathname: string
-}
-
 const preventUpdateMemo = (prevProps, nextProps) => {
   if (prevProps.pathname === nextProps.pathname) {
     return true
@@ -45,8 +43,9 @@ const preventUpdateMemo = (prevProps, nextProps) => {
   return false
 }
 
-const Nav: React.FC<NavProps> = memo(
-  ({ pathname }) => (
+const Nav: React.FC<{}> = memo(() => {
+  const { location } = useContext(LayoutContext)
+  return (
     <NavWrapper>
       <Link
         to="/tweets"
@@ -56,7 +55,7 @@ const Nav: React.FC<NavProps> = memo(
             action: "Click navbar logo",
           })
         }}
-        className={pathname.includes("/tweets") ? "active" : ""}
+        className={location.pathname.includes("/tweets") ? "active" : ""}
       >
         Working Tweets
       </Link>
@@ -68,14 +67,13 @@ const Nav: React.FC<NavProps> = memo(
             action: "Click navbar logo",
           })
         }}
-        className={pathname.includes("/tags") ? "active" : ""}
+        className={location.pathname.includes("/tags") ? "active" : ""}
       >
         Tags
       </Link>
     </NavWrapper>
-  ),
-  preventUpdateMemo
-)
+  )
+}, preventUpdateMemo)
 
 /**
  * MiddleGroup
