@@ -35,6 +35,8 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
 
   const posts = data.allMarkdownRemark.edges
 
+  console.log("posts", posts)
+
   const latestPost = posts[0]
 
   return (

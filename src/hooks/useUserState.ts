@@ -17,7 +17,7 @@ const useUserState = function (): userState {
 
   const checkIfUserIdle = function (): void {
     if (isIdle) {
-      // doSomething if it's idle
+      // do Something if it's idle
       counter = 0
       localCounter = 0
       sharedCounter = 0
