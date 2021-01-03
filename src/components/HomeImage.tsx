@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useContext, useEffect, useState, useRef } from "react"
 import styled from "styled-components"
-import WaterWave from "react-water-wave"
+// import WaterWave from "react-water-wave"
 
 import Clock from "./Clock"
 
@@ -12,48 +12,78 @@ import config from "../../config.json"
 const background_day: string = config.urlBackground.home.day
 const background_night: string = config.urlBackground.home.night
 
-const getDayNightShift = function (): string {
-  let dayOrNight: string
+const useDayNightShift = function (): string {
+	const [dayOrNight, setDayOrNight] = useState("DAY");
 
-  const currentdate = new Date()
-  const hours = currentdate.getHours()
-  if (hours >= 6 && hours <= 16) {
-    // day
-    dayOrNight = "DAY"
-  } else {
-    dayOrNight = "NIGHT"
-  }
+	useEffect(() => {
+		const currentdate = new Date()
+		const hours = currentdate.getHours()
 
-  return dayOrNight
+		let dayNight: string
+
+		if (hours >= 6 && hours <= 16) {
+			// day
+			dayNight = "DAY"
+		} else {
+			dayNight = "NIGHT"
+		}
+    setDayOrNight(dayNight);
+	}, []);
+	
+	return dayOrNight
+}
+
+const importWaterEffect = async (): Promise<{Object}> => {
+	const module = await import("react-water-wave")
+	return new Promise((resolve) => {
+    resolve(module);
+  });
 }
 
 const LargeWindow: React.FC<{}> = () => {
   const { isUserIdle } = useContext(LayoutContext)
-  const dayOrNight = getDayNightShift()
-  return (
-    <WaterWave
-      style={{
-        width: "100%",
-        height: "100%",
-        backgroundSize: "cover",
-      }}
-      imageUrl={dayOrNight === "DAY" ? background_day : background_night}
-      perturbance={0.01}
-    >
-      {({ drop, pause, play }) => {
-        isUserIdle ? pause() : play()
-        return (
-          <Clock
-            width={360}
-            height={360}
-            drop={drop}
-            className="clock"
-            isPause={isUserIdle}
-          />
-        )
-      }}
-    </WaterWave>
-  )
+	const [WaterWave, setWaterWave] = useState(null);
+	const dayOrNight = useDayNightShift()
+
+	useEffect(() => {
+		if (WaterWave) {
+			return
+		}
+		const getWaterEffect = async () => {
+			const module = await importWaterEffect()
+			setWaterWave(module)
+		}
+		getWaterEffect();
+	}, [])
+
+	if (!WaterWave) {
+		return <div></div>
+	}
+
+	return (
+		<WaterWave.default
+			style={{
+				width: "100%",
+				height: "100%",
+				backgroundSize: "cover",
+			}}
+			imageUrl={dayOrNight === "DAY" ? background_day : background_night}
+			perturbance={0.01}
+		>
+			{({ drop, pause, play }) => {
+				isUserIdle ? pause() : play()
+				return (
+					<Clock
+						width={360}
+						height={360}
+						drop={drop}
+						className="clock"
+						isPause={isUserIdle}
+					/>
+				)
+			}}
+		</WaterWave.default>
+	)
 }
 
 const SmallWindow: React.FC<{
@@ -164,12 +194,13 @@ const Wrapper = styled.div`
 interface Props {}
 
 const HomeImage: React.FC<Props> = () => {
+	const wrapperElement = useRef(null)
   const clientWidth = useWindowWidth()
-  const dayOrNight = getDayNightShift()
+  const dayOrNight = useDayNightShift()
 
   return (
-    <Wrapper dayOrNight={dayOrNight}>
-      {clientWidth > 800 ? (
+    <Wrapper dayOrNight={dayOrNight} ref={wrapperElement}>
+      {clientWidth > 800 && wrapperElement.current ? (
         <LargeWindow />
       ) : (
         <SmallWindow clientWidth={clientWidth} />

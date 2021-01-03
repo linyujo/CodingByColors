@@ -4,6 +4,7 @@ import styled, { css } from "styled-components"
 import { getRandomInt } from "../utils/numberUtils"
 import { getBrowserWidth } from "../utils/browserUtils"
 import { vrt_horiz_center } from "../styles/common-css"
+import useWindowWidth from "../hooks/useWindowWidth"
 
 import { images } from "../../config.json"
 
@@ -127,7 +128,8 @@ const Clock: React.FC<Props> = ({
 }) => {
   const [hoursRotate, setHoursRotate] = useState("")
   const [minutesRotate, setMinutesRotate] = useState("")
-  const [secondsRotate, setSecondsRotate] = useState("")
+	const [secondsRotate, setSecondsRotate] = useState("")
+	const clientWidth = useWindowWidth()
 
   const clockElement = useRef(null)
 
@@ -164,7 +166,7 @@ const Clock: React.FC<Props> = ({
 
     let updateDrop = null
 
-    if (clockElement.current && window.innerWidth > 800) {
+    if (clockElement.current && clientWidth > 800 && typeof drop === "function") {
       const Xleft = Math.round(
         clockElement.current.getBoundingClientRect().left
       )
@@ -184,7 +186,7 @@ const Clock: React.FC<Props> = ({
       clearInterval(updateCall)
       clearInterval(updateDrop)
     }
-  }, [window.innerWidth, isPause])
+  }, [clientWidth, isPause])
   return (
     <ClockW
       style={{
