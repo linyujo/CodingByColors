@@ -41,7 +41,9 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Create blog posts pages.
-  const posts = result.data.allMarkdownRemark.edges
+	const posts = result.data.allMarkdownRemark.edges
+	
+	// console.log('posts', util.inspect(posts, false, null, true));
 
   // Collect all tags
   const tagSet = new Set()

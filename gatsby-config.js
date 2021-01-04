@@ -63,7 +63,7 @@ module.exports = {
         //trackingId: `ADD YOUR TRACKING ID HERE`,
       },
     },
-    `gatsby-plugin-feed`,
+		//`gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -84,8 +84,9 @@ module.exports = {
       },
     },
     `gatsby-plugin-sass`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
+    // this (optional) plugin enables Progressive Webz App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+		// `gatsby-plugin-offline`,
+		`gatsby-plugin-styled-components`,
   ],
 }
