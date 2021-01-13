@@ -3,14 +3,83 @@ import { Link, graphql, PageProps } from "gatsby"
 import styled, { css } from "styled-components"
 import { MDXProvider } from "@mdx-js/react"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import { markdownHtml } from "../styles/common-css"
+import Icon from "../components/Icon"
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons"
 
 const Article = styled.article`
   ${markdownHtml}
+`
+
+const PreNextNav = styled.nav`
+  margin: 0 auto;
+	padding: 24px 56px;
+	width: 100%;
+	max-width: 1140px;
+	li{
+		line-height: 32px;
+	}
+`
+
+const hoverLine = css`
+	height: 2px;
+	width: 0;
+	background: #6b6b6b;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transition: 0.3s all;
+`
+
+const UnordLists = styled.ul`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	list-style: none;
+	padding: 0;
+	li {
+		.fa-layers{
+			font-size: 16px;
+		}
+		&:nth-child(1){
+			padding: 0 8px 0 0;
+			&::before{
+				content: "";
+				${hoverLine}
+			}
+		}
+		&:nth-child(2){
+			padding: 0 0 0 8px;
+			&::before{
+				content: "";
+				${hoverLine}
+			}
+		}
+		&:hover{
+			color: #6b6b6b;
+			a {
+				color: inherit;
+			}
+			&:nth-child(1){
+				&::before{
+					width: 100%;
+					transform: translateX(-50%);
+				}
+			}
+			&:nth-child(2){
+				&::before{
+					width: 100%;
+					transform: translateX(-50%);
+				}
+			}
+		}
+	}
 `
 
 interface PageContext {
@@ -57,32 +126,24 @@ const BlogPostTemplate: React.FC<PageProps<Props>> = ({
       <Article>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
       </Article>
-      <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+      <PreNextNav>
+        <UnordLists>
           <li>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+                <Icon icon={faChevronLeft} /> {previous.frontmatter.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+                {next.frontmatter.title} <Icon icon={faChevronRight} />
               </Link>
             )}
           </li>
-        </ul>
-      </nav>
+        </UnordLists>
+      </PreNextNav>
     </Layout>
   )
 }
