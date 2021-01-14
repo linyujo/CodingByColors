@@ -82,7 +82,7 @@ const UnordLists = styled.ul`
 	@media (max-width: 576px) {
     li {
 			flex: 1;
-			line-height: 20px;
+			line-height: 1em;
 			a {
 				display: flex;
 				.title{

@@ -42,9 +42,6 @@ const BlogPostTemplate: React.FC<PageProps<Props>> = ({
     previous,
     next,
 	}: { previous?: PageContext; next?: PageContext } = pageContext
-	
-	console.log('previous', previous);
-	console.log('next', next);
 
   return (
     <Layout

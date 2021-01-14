@@ -147,7 +147,7 @@ const Wrapper = styled.div`
   }
   @media (max-width: 800px) {
     height: 70vh;
-    background-image: background_night;
+    background-image: url(${background_night});
     background-size: cover;
     &::after {
       ${image.grayLayer}
