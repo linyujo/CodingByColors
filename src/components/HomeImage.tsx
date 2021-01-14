@@ -43,7 +43,7 @@ const importWaterEffect = async (): Promise<{Object}> => {
 const LargeWindow: React.FC<{}> = () => {
   const { isUserIdle } = useContext(LayoutContext)
 	const [WaterWave, setWaterWave] = useState(null);
-	const dayOrNight = useDayNightShift()
+	// const dayOrNight = useDayNightShift()
 
 	useEffect(() => {
 		if (WaterWave) {
@@ -67,7 +67,7 @@ const LargeWindow: React.FC<{}> = () => {
 				height: "100%",
 				backgroundSize: "cover",
 			}}
-			imageUrl={dayOrNight === "DAY" ? background_day : background_night}
+			imageUrl={background_night}
 			perturbance={0.01}
 		>
 			{({ drop, pause, play }) => {
@@ -120,10 +120,7 @@ const Wrapper = styled.div`
     font-family: "Architects Daughter", cursive;
   }
   .heading-wrapper {
-    /* width: 100%; */
     position: absolute;
-    /* top: 50%; */
-    /* right: 6%; */
     top: 50%;
     left: 25%;
     transform: translate(-25%, -50%);
@@ -150,10 +147,7 @@ const Wrapper = styled.div`
   }
   @media (max-width: 800px) {
     height: 70vh;
-    background-image: ${props =>
-      props.dayOrNight === "DAY"
-        ? `url(${background_day})`
-        : `url(${background_night})`};
+    background-image: background_night;
     background-size: cover;
     &::after {
       ${image.grayLayer}
@@ -196,10 +190,10 @@ interface Props {}
 const HomeImage: React.FC<Props> = () => {
 	const wrapperElement = useRef(null)
   const clientWidth = useWindowWidth()
-  const dayOrNight = useDayNightShift()
+  // const dayOrNight = useDayNightShift()
 
   return (
-    <Wrapper dayOrNight={dayOrNight} ref={wrapperElement}>
+    <Wrapper ref={wrapperElement}>
       {clientWidth > 800 && wrapperElement.current ? (
         <LargeWindow />
       ) : (
