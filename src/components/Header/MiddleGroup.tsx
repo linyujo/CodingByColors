@@ -52,7 +52,7 @@ const Nav: React.FC<{}> = memo(() => {
         onClick={() => {
           ReactGA.event({
             category: "User",
-            action: "Click navbar logo",
+            action: "Click nav: '/tweets'",
           })
         }}
         className={location.pathname.includes("/tweets") ? "active" : ""}
@@ -64,7 +64,7 @@ const Nav: React.FC<{}> = memo(() => {
         onClick={() => {
           ReactGA.event({
             category: "User",
-            action: "Click navbar logo",
+            action: "Click nav: '/tags'",
           })
         }}
         className={location.pathname.includes("/tags") ? "active" : ""}

@@ -26,6 +26,7 @@ const IconGroup = styled.div`
 const AvatarWrapper = styled.div`
   a {
     margin-left: 10px;
+		margin-right: 6px;
   }
 `
 
@@ -43,9 +44,13 @@ const Icons: React.FC<IconProps> = () => (
       </a>
     </IconGroup>
     <AvatarWrapper>
-      <Link to="/">
+			<a 
+				href="https://aboutraine.netlify.app/"
+				target="_blank"
+				rel="noopener noreferrer nofollow"
+			>
         <Avatar src="/images/avatar.jpg" alt="Raine" width={40} height={40} />
-      </Link>
+      </a>
     </AvatarWrapper>
   </Centre>
 )

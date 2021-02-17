@@ -79,7 +79,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
               onClick={() => {
                 ReactGA.event({
                   category: "User",
-                  action: "Click navbar logo",
+                  action: "Click nav: '/tweets'",
                 })
               }}
             >
@@ -92,7 +92,7 @@ const PopupNav: FC<Props> = ({ isHide }) => {
               onClick={() => {
                 ReactGA.event({
                   category: "User",
-                  action: "Click navbar logo",
+                  action: "Click nav: '/tags'",
                 })
               }}
             >
@@ -109,14 +109,18 @@ const PopupNav: FC<Props> = ({ isHide }) => {
             </a>
           </li>
           <li>
-            <Link to="/">
+            <a
+							href="https://aboutraine.netlify.app/"
+							target="_blank"
+							rel="noopener noreferrer nofollow"
+						>
               <Avatar
                 src="/images/avatar.jpg"
                 alt="Raine"
                 width={40}
                 height={40}
               />
-            </Link>
+            </a>
           </li>
         </ul>
       </Wrapper>

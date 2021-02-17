@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "coding-by-colors-blog",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "A personal technical blog about web front end development and visual art laboratory",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Raine Lin <linyujo@gmail.com>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/linyujo/codingbycolors"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -55,7 +55,7 @@
     "@types/styled-components": "^5.1.2",
     "prettier": "2.0.5"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://codingbycolors.me",
   "keywords": [
     "gatsby"
   ],
@@ -63,7 +63,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/linyujo/codingbycolors"
   },
   "scripts": {
     "build": "NODE_ENV=production gatsby build",

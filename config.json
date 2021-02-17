@@ -1,4 +1,5 @@
 {
+	"url": "https://codingbycolors.me",
   "urlBackground": {
     "home": {
       "day": "/images/rain_day.jpg",
@@ -16,5 +17,6 @@
       "ricepaperV3": "/images/ricepaper_v3.png",
       "paper_1": "/images/paper_1.png"
     }
-  }
+	},
+	"GA_Measurement_ID": "G-CZPXV3TMJW"
 }
