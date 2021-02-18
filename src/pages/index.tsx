@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql, PageProps } from "gatsby"
 import styled from "styled-components"
 
-// import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Headerline from "../components/Headline"
 import PostGrid from "../components/PostGrid"
@@ -42,7 +41,6 @@ const BlogIndex: React.FC<PageProps<Props>> = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="All posts" />
-      {/* <Bio /> */}
       <Home>
         <HomeImage />
         <div className="container">
