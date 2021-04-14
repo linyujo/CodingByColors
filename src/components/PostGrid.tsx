@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import SquareImage from "./SquareImage"
 import Tag from "./Tag/Tag"
 import { image, postGridInfo } from "../styles/common-css"
+import useWindowWidth from "../hooks/useWindowWidth"
 
 const pseudoTriangle = css`
   content: "";
@@ -160,9 +161,19 @@ interface Props {
 }
 
 const PostGrid: React.FC<Props> = ({ post, url, index }) => {
-  const isReversed = index % 3 !== 1 ? "" : "reversed"
+	const clientWidth = useWindowWidth();
+  const isReversed = (): string => {
+		let classN = "";
+		if (clientWidth > 1200) {
+			classN = index % 3 !== 1 ? "" : "reversed"
+		} else {
+			classN = index % 2 !== 1 ? "" : "reversed"
+		}
+		return classN;
+	}
+	
   return (
-    <Wrapper className={`${isReversed}`}>
+    <Wrapper className={`${isReversed()}`}>
       {post.headerImage && (
         <Link to={url} className="cover-link">
           <SquareImage image={post.headerImage} />

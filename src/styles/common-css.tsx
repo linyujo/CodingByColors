@@ -108,47 +108,63 @@ const markdownHtml = css`
       "Microsoft JhengHei", sans-serif;
   }
   h2 {
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
     font-weight: 700;
-    font-size: 1.5em;
+    font-size: 1.8em;
     line-height: 1.25;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid #eee;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid #b1aaa0;
   }
   h3 {
-    font-size: 1.25em;
-    margin: 24px 0 16px 0;
+    font-size: 1.5em;
+		margin-top: 1.5em;
+		margin-bottom: 1em;
     font-weight: 700;
     line-height: 1.25;
   }
   h4 {
-    margin-top: 24px;
+		font-size: 1.2em;
+    margin-top: 1.5em;
     margin-bottom: 16px;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: 0.025em;
   }
   p {
-    margin-bottom: 28px;
-    font-size: 18px;
+    margin-bottom: 1em;
+    font-size: 1.125em;
     line-height: 1.5;
     letter-spacing: 0.025em;
     display: block;
     unicode-bidi: embed;
     white-space: pre-wrap;
-    code {
-      background-color: rgba(0, 0, 0, 0.04);
-      font-family: inherit;
-      color: inherit;
-    }
   }
   ol {
     padding-left: 2em;
+		letter-spacing: 0.025em;
     /* @media (max-width: 576px) {
       padding-left: 0;
     } */
   }
+	a {
+		color: #007acc;
+	}
+	.alert{
+		padding: 16px;
+		margin-bottom: 20px;
+		border: 1px solid transparent;
+		border-radius: 4px;
+		&.alert-info{
+			color: #31708f;
+			background: #d8edf7;
+			border-color: #bce8f1;
+		}
+	}
+	.jump-link{
+		color: #007acc;
+		margin-left: 0.5rem
+	}
   blockquote {
     font-size: 16px;
     font-style: normal;
@@ -156,38 +172,69 @@ const markdownHtml = css`
     color: #777;
     border-left: 0.25em solid #ddd;
     margin: 0 0 16px 0;
-    code[class*="language-"] {
-      color: inherit;
-    }
+		p {
+			background: #f1f1f1;
+		}
   }
+	code[class*="language-"] {
+		margin: 6px;
+		background-color: rgba(0, 0, 0, 0.05);
+		font-family: inherit;
+		color: inherit;
+	}
   .gatsby-highlight {
-    margin-bottom: 28px;
-    font-size: 85%;
-    line-height: 1.45;
-    border-radius: 3px;
-    background-color: #f0ebe5;
-    pre {
-      background-color: #f0ebe5;
+		/*
+		 * Add back the container background-color, border-radius, padding, margin
+		 * and overflow that we removed from <pre>.
+		 */
+		background-color: #2d2d2d;
+		border-radius: 0.3em;
+		margin: 0 0 1.5em 0;
+		padding: 1em;
+		overflow: auto;
+    pre[class*="language-"] {
       padding-left: 24px;
       * {
         font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono",
           monospace;
+				font-size: 16px;
+				text-shadow: none;
+				tab-size: 2;
       }
-    }
-    code[class*="language-"] {
-      font-size: 16px;
-      tab-size: 2;
-      .token.punctuation {
-        padding: 0.1em;
-      }
-      .token.operator {
-        background: none;
-      }
-      span {
-        display: initial;
-      }
+			.token{
+				&.punctuation {
+					padding: 0.1em;
+				}
+				&.operator {
+					background: none;
+				}
+			}
+			span[class*="token"] {
+				display: initial; /* 蓋過 _basic.css 的inline-block */
+			}
+			/*
+			 * Remove the default PrismJS theme background-color, border-radius, margin,
+			 * padding and overflow.
+			 * 1. Make the element just wide enough to fit its content.
+			 * 2. Always fill the visible space in .gatsby-highlight.
+			 */
+			background-color: transparent;
+			margin: 0;
+			padding: 0;
+			overflow: initial;
+			float: left; /* 1 */
+			min-width: 100%; /* 2 */
     }
   }
+	.gatsby-highlight-code-line {
+  	background-color: #275982;
+		display: block;
+		margin-right: -1em;
+		margin-left: -1em;
+		padding-right: 1em;
+		padding-left: 0.75em;
+		border-left: 0.25em solid #ffa7c4;
+	}
 `
 
 const triangleShape = {

@@ -53,7 +53,7 @@ gatsby-plugin-typescript會將Gatsby環境中的`.js`編譯成`.tsx`檔。
 
 打開`gatsby-config.js`，拉到`plugins: []`的最後一行，將`gatsby-plugin-typescript`添加到plugins裡面。
 
-```javascript
+```javascript{6-11}
 // gatsby-config.js
 module.exports = {
   plugins: [
@@ -147,8 +147,8 @@ $ yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
 最後一件事，在package.json中，貼上一個指令，做全專案的typescript型別檢查：
 ```javascript
 "scripts": {
-    // ...
-    "type-check": "tsc --noEmit"
+	// ...
+	"type-check": "tsc --noEmit"
 }
 ```
 到目前為止，環境設定就告一個段落。先commit，接下來會將所有`.js`檔修改成`.tsx`。
@@ -161,9 +161,9 @@ $ yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
 ### src/components/layout.js
 將副檔名改成`.tsx`。
 
-將`const Layout = ({ location, title, children }) => `改成，以typescript的語法宣告
+將`const Layout = ({ location, title, children }) => `改成，以Typescript的語法宣告
 
-```jsx
+```tsx{1-4,6}
 interface Props {
   location: Location
   title: string
@@ -183,13 +183,13 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
 ![](https://i.imgur.com/GAcozqO.png)
 
 由於不是所有套件都有使用typescript，所以我們要在專案的**根目錄**新增一個檔案`node_modules.d.ts`。並貼上下列程式碼：
-```typescript
+```typescript{3}
 // node_modules.d.ts
 
 declare module "react-helmet"
 ```
-接著，繼續將宣告的語法改成typescript。
-```jsx
+接著，繼續將宣告的語法改成typescript：
+```tsx{1-6,8-12,78-82,84-89}
 interface Props {
   description?: string
   lang?: string
@@ -266,6 +266,7 @@ const SEO: React.FC<Props> = ({
   )
 }
 
+// Comment out the typechecking with PropTypes(By the library 'prop-types')
 // SEO.defaultProps = {
 //   lang: `en`,
 //   meta: [],
@@ -292,7 +293,7 @@ export default SEO
 而Component所需要的Props，則會被`PageProps`打包成`data`物件。
 以`404.js`為例，要取得`site`，得從`data`物件中取得。
 
-```jsx
+```tsx{4-8,11,13}
 import { graphql, PageProps } from "gatsby"
 
 interface Props {
@@ -324,7 +325,7 @@ export default NotFoundPage
 
 參考`404.jsx`將`PageProps`注入元件中。
 
-```jsx
+```tsx{1-8,10-12}
 interface Props {
   allMarkdownRemark: any
   site: {
@@ -382,7 +383,7 @@ export default BlogIndex
 
 其中在下方第38行的pageContext，是gatsby用來記錄網誌上一篇/下一篇的工具。
 
-```jsx
+```tsx{1-8,10-17,19-21,23-28}
 interface PageContext {
   fields: {
     slug: string
@@ -487,7 +488,7 @@ export default BlogPostTemplate
 
 要注意的是，`typography`與`typography-theme-wordpress-2016`這兩個套件在gatsby官方提供的懶人包當中，沒有typescript dependency。
 就如同前面`seo.tsx`，當中的`react-helmet`一樣，我們要在`node_modules.d.ts`補上`typography`：
-```typescript
+```typescript{2-3}
 // node_modules.d.ts
 declare module "typography"
 declare module "typography-theme-wordpress-2016"

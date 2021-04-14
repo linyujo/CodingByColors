@@ -6,6 +6,7 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 // import { rhythm, scale } from "../utils/typography"
+import "../styles/prism.css"
 import { markdownHtml } from "../styles/common-css"
 import PreNextNav from "../components/BlogPostFooterNav"
 
