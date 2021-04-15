@@ -7,9 +7,10 @@ date: 2020-01-08T1:00:00Z
 tags:
   - Algorithms and Data Structures
 description: 請完成一個 function：參數為 string，請判斷該字串正著看和反著看，可否是相同的單詞？是的話請回傳 true, 否則回傳 false
-headerImage: "https://imgur.com/NumU4Eo.jpg"
+headerImage: "https://imgur.com/RTzvFBw.jpg"
 templateKey: blog-post
 ---
+> Photo by <a href="https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kelly Sikkema</a> on <a href="https://unsplash.com/s/photos/string?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 ### 請完成一個 function：參數為 string，請判斷該字串正著看和反著看，可否是相同的單詞？是的話請回傳 true, 否則回傳 false。
 

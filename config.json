@@ -5,7 +5,7 @@
       "day": "/images/rain_day.jpg",
       "night": "/images/rain_night.jpg"
     },
-    "/tags": "/images/library.jpg",
+    "/tags": "/images/tags.jpg",
     "/tweets": "/images/diary.jpg",
     "default": "/images/default.jpg"
   },

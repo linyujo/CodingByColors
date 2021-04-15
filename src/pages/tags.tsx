@@ -28,6 +28,7 @@ interface DesktopProps {
 const DesktopContentW = styled.div`
   .content-wrapper {
     ${mainWrapper}
+		padding-bottom: 64px;
   }
   .tags-image {
     flex: 1;

@@ -8,9 +8,11 @@ description: 僅是一個小小的元件，一個span或一個div，都要用Con
 tags:
   - React Component Patterns
   - React
-headerImage: "https://imgur.com/vOpiMtK.jpg"
+headerImage: "https://imgur.com/dVSlruh.jpg"
 templateKey: blog-post
 ---
+> Photo by <a href="https://unsplash.com/@helloimnik?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hello I'm Nik</a> on <a href="https://unsplash.com/s/photos/lego?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 上一章提到，父容器可以把state和handlers作為參數，傳給children。
 這一章則要進一步說明，如果children當中，有部分的元件與父容器的相依性很高，例如要呼叫父容器的function進行一連串動作，那麼父容器與子元件之間該如何合作，以最少的程式碼降低元件之間的耦合度。
 

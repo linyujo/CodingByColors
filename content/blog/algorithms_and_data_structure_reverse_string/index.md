@@ -7,9 +7,10 @@ date: 2020-01-03T1:00:00Z
 description: 請完成一個 function：參數為 string，return 該字串的倒轉
 tags:
   - Algorithms and Data Structures
-headerImage: "https://imgur.com/aJtranh.jpg"
+headerImage: "https://imgur.com/mT4Narn.jpg"
 templateKey: blog-post
 ---
+> Photo by <a href="https://unsplash.com/@chrislawton?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Chris Lawton</a> on <a href="https://unsplash.com/s/photos/string?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 ### 請完成一個 function：參數為 string，return 該字串的倒轉。
 

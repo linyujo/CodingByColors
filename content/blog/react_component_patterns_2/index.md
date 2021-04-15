@@ -8,9 +8,11 @@ description: 僅是一個小小的元件，一個span或一個div，都要用Con
 tags:
   - React Component Patterns
   - React
-headerImage: "https://imgur.com/vOpiMtK.jpg"
+headerImage: "https://imgur.com/dVSlruh.jpg"
 templateKey: blog-post
 ---
+> Photo by <a href="https://unsplash.com/@helloimnik?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hello I'm Nik</a> on <a href="https://unsplash.com/s/photos/lego?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 上一章我們提到，`React.Children.map()`及context都可以將父容器的資料傳下去給子元件。
 尤其context更具有彈性，不論UI有任何改動，只要正確使用Provider與Consumer，都可拿到父容器的資料。
 

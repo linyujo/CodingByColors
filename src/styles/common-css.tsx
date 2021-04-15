@@ -130,7 +130,16 @@ const markdownHtml = css`
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: 0.025em;
+		text-transform: none;
   }
+	h5 {
+		font-size: 1.125em;
+    margin-top: 1.2em;
+    margin-bottom: 16px;
+		line-height: 1.25;
+    letter-spacing: 0.025em;
+		text-transform: none;
+	}
   p {
     margin-bottom: 1em;
     font-size: 1.125em;
@@ -147,6 +156,16 @@ const markdownHtml = css`
       padding-left: 0;
     } */
   }
+	ul {
+		margin-bottom: 1em;
+		padding-left: 2em;
+		letter-spacing: 0.025em;
+		list-style-type: disc;
+		li {
+			list-style: disc;
+			line-height: 1.5;
+		}
+	}
 	a {
 		color: #007acc;
 	}

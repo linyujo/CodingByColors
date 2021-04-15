@@ -8,10 +8,10 @@ description: 用 TypeScript 寫 React
 tags:
  - React
  - TypeScript
-headerImage: "https://imgur.com/9hZmqkp.jpg"
+headerImage: "https://imgur.com/ZpZkCXE.jpg"
 templateKey: blog-post
 ---
-> Photo by <a href="https://unsplash.com/@trine?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Katrin Hauf</a> on <a href="https://unsplash.com/s/photos/paper?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+> Photo by <a href="https://unsplash.com/@copperandwild?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dee @ Copper and Wild</a> on <a href="https://unsplash.com/s/photos/paper-instruction?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 
 create-react-app 官方有個 TypeScript 初始化懶人包，我們將透過 command line 下載懶人包，並將專案命名為 typescript-react-textbook。
 
