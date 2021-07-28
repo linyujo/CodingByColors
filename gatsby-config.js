@@ -81,6 +81,16 @@ module.exports = {
       },
     },
     `gatsby-plugin-sass`,
+		// Valine Comments Plugin
+		{
+			resolve: `gatsby-plugin-valine`,
+			options: {
+					appId: `YxKsvUIow3SlqL28pE2MuzxD-MdYXbMMI`,
+					appKey: `IFfDKahJFaLoCsvYxuxXXrie`,
+					avatar: `robohash`,
+					lang: `en`
+			},
+		},
     // this (optional) plugin enables Progressive Webz App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
 		// `gatsby-plugin-offline`,

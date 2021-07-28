@@ -9,6 +9,7 @@ import SEO from "../components/seo"
 import "../styles/prism.css"
 import { markdownHtml } from "../styles/common-css"
 import PreNextNav from "../components/BlogPostFooterNav"
+import Comment from "../components/Comment"
 
 const Article = styled.article`
   ${markdownHtml}
@@ -57,6 +58,7 @@ const BlogPostTemplate: React.FC<PageProps<Props>> = ({
 
       <Article>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
+				<Comment />
       </Article>
       <PreNextNav previous={previous} next={next} />
     </Layout>
